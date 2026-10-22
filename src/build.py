@@ -5,14 +5,14 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from content_phys import PHYS, PHYS_EXTRA, M, FR  # noqa: E402
-from content_chem import CHEM  # noqa: E402
+from content_chem import CHEM, CHEM_EXTRA  # noqa: E402
 from figs import FIGS, EXFIGS  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "IEB Physical Sciences · Grade 11"
 
 # 物理、化学交替排列
-DAYS = [d for pair in zip(PHYS, CHEM) for d in pair] + PHYS_EXTRA
+DAYS = [d for pair in zip(PHYS, CHEM) for d in pair] + PHYS_EXTRA + CHEM_EXTRA
 N = len(DAYS)
 
 
@@ -125,14 +125,14 @@ def index_page():
     for i, d in enumerate(DAYS):
         no = i + 1
         if no == len(PHYS) + len(CHEM) + 1:
-            rows += '<tr><td colspan="6" style="background:#ecfdf5"><b>补充：根据近期测验的薄弱点（电磁学、静电推理）</b></td></tr>'
+            rows += '<tr><td colspan="6" style="background:#ecfdf5"><b>补充 Day 25–31：近期测验的薄弱点（电磁学、静电推理），以及对照 IEB Grade 11 考纲补齐的考点（竖直运动、反应速率、电化学）</b></td></tr>'
         color = "#0f766e" if subj(d) == "phy" else "#b45309"
         rows += (f'<tr><td><b>Day {no:02d}</b></td><td style="color:{color};font-weight:700">{subj_zh(d)}</td>'
                  f'<td><a href="days/d{no:02d}.html">{d["zh"]}</a><br><span class="note">{d["en"]}</span></td>'
                  f'<td><a href="answers/a{no:02d}.html">答案</a></td><td></td><td></td></tr>')
     body = f"""<section class="sheet flow">
 <div class="hd"><span class="day">Grade 11</span><span class="t">Physical Sciences 每日一练</span><span class="sub">IEB · 物理 P1 + 化学 P2</span></div>
-<p>每天一张 A4（正面讲解、反面练习），双面打印。Day 01–24 物理和化学交替，覆盖 Grade 11 两张试卷的核心考点；Day 25–27 是针对近期测验薄弱点的物理补充，共 {N} 天。屏幕上的图解可以播放动画。</p>
+<p>每天一张 A4（正面讲解、反面练习），双面打印。Day 01–24 物理和化学交替，覆盖 Grade 11 两张试卷的核心考点；Day 25–31 是补充内容：针对近期测验薄弱点，并对照 IEB Grade 11 考纲补齐竖直运动、反应速率、氧化还原与电化学电池，共 {N} 天。屏幕上的图解可以播放动画。</p>
 <div class="card-links">
 <a href="formulas.html"><b>🧮 公式总表</b><br><span class="note">对照 IEB data sheet，并列出表上没有、必须自己记的公式</span></a>
 <a href="definitions.html"><b>📖 必背定义</b><br><span class="note">定义题每题 2 分，全部汇总，可遮住自测</span></a>
@@ -144,6 +144,12 @@ def index_page():
 <li><b>15 分钟学习</b>：读“今日新知”，看图解（屏幕上可以播放动画），把公式抄一遍，读失分点。</li>
 <li><b>20 分钟练习</b>：翻到反面，先背定义，再按 ★ → ★★ → ★★★ 做题。<b>不要先看答案。</b></li>
 <li><b>对答案</b>：用答案页按 ✓ 给自己打分，在下表记录；错题第二天重做。</li>
+</ol>
+<h3 class="sec">11 月期末前时间不够时的顺序</h3>
+<ol class="tight">
+<li>先做 Day 25–31：电磁学、静电推理、竖直运动、反应速率、氧化还原、电化学电池。这些是考纲内容中原来缺失、或近期测验失分集中的部分。</li>
+<li>再按“物理一天、化学一天”复习 Day 01–24，每天先读反面的失分点，再做 ★★ 和 ★★★ 题。</li>
+<li>每天睡前花 10 分钟背“必背定义”页（定义题每题 2 分，最容易拿分）。</li>
 </ol>
 <h3 class="sec">进度表</h3>
 <table class="grid"><tr><th style="width:62px">天</th><th style="width:66px">科目</th><th>主题</th><th style="width:44px">答案</th><th style="width:70px">完成日期</th><th style="width:58px">得分</th></tr>{rows}</table>
@@ -178,7 +184,7 @@ def formulas_page():
                 ("电磁", ["磁通链 = NΦ", "1 cm² = 10⁻⁴ m²"]),
                 ("比例法", ["F₂ = F₁(r₁/r₂)²", "零场点 kQ₁/x² = kQ₂/(d − x)²"]),
                 ("单位换算", ["km·h⁻¹ ÷ 3,6 = m·s⁻¹", "1 kWh = 3,6 × 10⁶ J"])]
-    chem_f = [("摩尔", ["n = m/M", "N = nN<sub>A</sub>", "n = V/V<sub>m</sub>"]), ("溶液", ["c = n/V", "c₁V₁ = c₂V₂"]),
+    chem_f = [("电化学", ["E°<sub>cell</sub> = E°<sub>cathode</sub> − E°<sub>anode</sub>", "An Ox, Red Cat"]), ("速率", ["速率 = Δ量/Δt"]), ("摩尔", ["n = m/M", "N = nN<sub>A</sub>", "n = V/V<sub>m</sub>"]), ("溶液", ["c = n/V", "c₁V₁ = c₂V₂"]),
               ("气体", ["p₁V₁/T₁ = p₂V₂/T₂", "pV = nRT", "T(K) = θ(°C) + 273"]), ("能量", ["ΔH = Σ断键 − Σ成键", "ΔH = H<sub>P</sub> − H<sub>R</sub>"]),
               ("产率与纯度", ["% yield = 实际/理论 × 100", "% purity = m<sub>纯</sub>/m<sub>样品</sub> × 100"])]
     body = f"""<section class="sheet">
@@ -202,7 +208,7 @@ def formulas_page():
 
 def definitions_page():
     out = ""
-    for title, group, cls in (("物理 P1", PHYS + PHYS_EXTRA, ""), ("化学 P2", CHEM, "chem")):
+    for title, group, cls in (("物理 P1", PHYS + PHYS_EXTRA, ""), ("化学 P2", CHEM + CHEM_EXTRA, "chem")):
         rows = ""
         seen = set()
         for d in group:

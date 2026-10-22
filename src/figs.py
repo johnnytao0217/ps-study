@@ -852,11 +852,143 @@ def p27_zero():
     return fig(svg(p, 580, 210, "".join(s)), "左：两个同号电荷之间的零场点；右：E 随距离的变化（反平方）")
 
 
+def p28_vertical():
+    p = "v28"
+    css = (".fig.play .bl{animation:v28b 3s ease-in-out both}"
+           "@keyframes v28b{0%{transform:translateY(0)}50%{transform:translateY(-120px);animation-timing-function:ease-in}100%{transform:translateY(0)}}")
+    gx, gy = 70, 170
+    s = [f'<line x1="20" y1="{gy + 10}" x2="160" y2="{gy + 10}" stroke="#1f2937" stroke-width="2"/>']
+    # strobe positions (equal time intervals): heights from 14.7 m/s throw, scaled
+    ts = [0, 0.5, 1.0, 1.5]
+    for i, t in enumerate(ts):
+        h = 14.7 * t - 4.9 * t * t
+        y = gy - h * 10.9
+        v = 14.7 - 9.8 * t
+        s.append(f'<circle cx="{gx}" cy="{y:.1f}" r="7" fill="#bfdbfe" stroke="#1e40af" opacity=".55"/>')
+        if v > 0.1:
+            s.append(arrow(p, gx + 14, y, gx + 14, y - v * 4, "b", 2))
+        s.append(text(gx - 14, y + 4, f"{t:.1f} s", size=9.5, anchor="end", c="s"))
+    s += [f'<circle class="bl" cx="{gx}" cy="{gy}" r="8" fill="#2563eb"/>',
+          text(gx + 34, gy - 140, "最高点：v = 0", size=11, c="r", weight=700),
+          text(gx + 34, gy - 124, "a 仍 = 9,8 m·s⁻² ↓", size=11, c="r"),
+          text(gx + 34, gy - 40, "蓝箭头 = 速度", size=10.5, c="b"),
+          text(gx + 34, gy - 24, "越往上越短", size=10.5, c="b"),
+          text(20, 204, "上抛 14,7 m·s⁻¹：每 0,5 s 的位置", size=10.5, c="s")]
+    ox, oy, W = 260, 100, 290
+    s += [f'<line x1="{ox}" y1="{oy}" x2="{ox + W}" y2="{oy}" stroke="#1f2937" stroke-width="1.5"/>',
+          f'<line x1="{ox}" y1="20" x2="{ox}" y2="180" stroke="#1f2937" stroke-width="1.5"/>',
+          text(ox + 4, 18, "v（向上为正）", size=10.5), text(ox + W, oy + 16, "t", size=11, anchor="end", cls="m"),
+          text(ox + W / 2, 22, "弹跳球的 v–t 图", size=11.5, weight=700, anchor="middle")]
+    # 斜率处处为 −g：每单位时间速度减少 70（像素单位），三段互相平行
+    k, sx = 70.0, 70.0
+    t, v0, lines = 0.0, 0.0, []
+    for vstart, vend in ((0, -70), (60, -60), (50, -50)):
+        dt = (vstart - vend) / k
+        lines.append(f'<line x1="{ox + t * sx:.1f}" y1="{oy - vstart}" x2="{ox + (t + dt) * sx:.1f}" y2="{oy - vend}" stroke="#2563eb" stroke-width="2.6"/>')
+        t += dt
+    s += lines
+    s += [f'<polygon points="{ox},{oy} {ox + sx},{oy + 70} {ox + sx},{oy}" fill="#bbf7d0" opacity=".7"/>',
+          f'<line x1="{ox + sx}" y1="175" x2="{ox + sx}" y2="30" stroke="#9ca3af" stroke-dasharray="3 3"/>',
+          text(ox + sx + 6, 42, "触地：v 由负变正", size=10.5, c="s"),
+          text(ox + 150, 70, "各段平行：斜率 = −g", size=11, c="r", weight=700),
+          text(ox + 4, oy + 90, "绿色面积 = 下落高度", size=10.5, c="g")]
+    return fig(svg(p, 580, 210, "".join(s)), "左：上抛运动（动画中小球上升又落回）；右：弹跳球 v–t 图，各段平行", style=css)
+
+
+def c29_rates():
+    p = "c29"
+    ox, oy, W, H = 40, 180, 300, 150
+    import math as _m
+
+    def mb(T):
+        pts = []
+        for i in range(0, 101):
+            E = i / 100 * 4.0
+            f = E ** 0.5 * _m.exp(-E / T) / T ** 1.5
+            pts.append((ox + E / 4.0 * W, oy - f * 160))
+        return pts
+    c1, c2 = mb(0.5), mb(0.9)
+    Ea = 2.2
+    xe = ox + Ea / 4 * W
+    shade = [(x, y) for x, y in c2 if x >= xe]
+    poly = f"{xe},{oy} " + " ".join(f"{x:.1f},{y:.1f}" for x, y in shade) + f" {ox + W},{oy}"
+    s = [f'<polygon points="{poly}" fill="#fecaca" class="fd" style="--d:1.6s"/>',
+         f'<line x1="{ox}" y1="{oy}" x2="{ox + W + 10}" y2="{oy}" stroke="#1f2937" stroke-width="1.5"/>',
+         f'<line x1="{ox}" y1="{oy}" x2="{ox}" y2="20" stroke="#1f2937" stroke-width="1.5"/>',
+         text(ox + 4, 18, "粒子数", size=10.5), text(ox + W + 6, oy + 16, "动能 Ek", size=10.5, anchor="end"),
+         f'<polyline points="{" ".join(f"{x:.1f},{y:.1f}" for x, y in c1)}" fill="none" stroke="#2563eb" stroke-width="2.4"/>',
+         f'<polyline class="dr" style="--d:.4s;--len:420" points="{" ".join(f"{x:.1f},{y:.1f}" for x, y in c2)}" fill="none" stroke="#dc2626" stroke-width="2.4"/>',
+         text(ox + 26, 36, "T₁", c="b", weight=700), text(ox + 64, 96, "T₂ &gt; T₁", c="r", weight=700),
+         f'<line x1="{xe}" y1="{oy}" x2="{xe}" y2="40" stroke="#1f2937" stroke-dasharray="4 3"/>', text(xe + 4, 50, "Ea", cls="m", weight=700),
+         f'<line x1="{xe - 50}" y1="{oy}" x2="{xe - 50}" y2="120" stroke="#059669" stroke-dasharray="4 3" class="fd" style="--d:2.4s"/>',
+         text(xe - 50, oy + 30, "绿线：加催化剂后 Ea 左移", size=10.5, c="g", anchor="middle", d=2.4),
+         text(xe + 10, 150, "阴影：能量 ≥ Ea", size=10.5, c="r", d=1.6), text(xe + 10, 164, "的粒子（可反应）", size=10.5, c="r", d=1.6)]
+    gx, gy, gw, gh = 400, 170, 150, 120
+    curve = " ".join(f"{gx + t:.1f},{gy - gh * 0.85 * (1 - _m.exp(-t / 30)):.1f}" for t in range(0, gw + 1, 3))
+    curve2 = " ".join(f"{gx + t:.1f},{gy - gh * 0.85 * (1 - _m.exp(-t / 70)):.1f}" for t in range(0, gw + 1, 3))
+    s += [f'<line x1="{gx}" y1="{gy}" x2="{gx + gw}" y2="{gy}" stroke="#1f2937" stroke-width="1.5"/>',
+          f'<line x1="{gx}" y1="{gy}" x2="{gx}" y2="{gy - gh - 10}" stroke="#1f2937" stroke-width="1.5"/>',
+          text(gx + 4, gy - gh - 12, "生成气体体积", size=10.5), text(gx + gw, gy + 16, "时间", size=10.5, anchor="end"),
+          f'<polyline points="{curve}" fill="none" stroke="#dc2626" stroke-width="2.4"/>',
+          f'<polyline points="{curve2}" fill="none" stroke="#2563eb" stroke-width="2.4"/>',
+          text(gx + 30, gy - 112, "粉末 / 更热：更快", size=10, c="r"), text(gx + 60, gy - 50, "块状：较慢", size=10, c="b"),
+          text(gx, gy + 34, "斜率 = 速率；最终体积相同", size=10.5, c="s")]
+    return fig(svg(p, 580, 216, "".join(s)), "左：Maxwell–Boltzmann 能量分布（温度升高，阴影面积变大）；右：速率曲线")
+
+
+def c30_redox():
+    p = "c30"
+    css = (".fig .cu{opacity:1}.fig.play .cu{animation:fig-fade 1s ease-out 1.6s both}"
+           ".fig.play .ed{animation:c30e 1.4s ease-in .2s 2 both}@keyframes c30e{from{transform:translate(0,0);opacity:1}to{transform:translate(34px,30px);opacity:.2}}")
+    s = ['<path d="M40 60 V180 H180 V60" fill="none" stroke="#1f2937" stroke-width="2"/>',
+         '<rect x="42" y="95" width="136" height="83" fill="#bfdbfe" opacity=".75"/>',
+         '<rect x="98" y="40" width="22" height="130" fill="#9ca3af" stroke="#1f2937"/>', text(109, 34, "Zn", anchor="middle", weight=700),
+         '<g class="cu">' + "".join(f'<circle cx="{120 + (i % 2) * 5}" cy="{110 + i * 9}" r="3.5" fill="#b45309"/>' for i in range(7)) + '</g>',
+         text(150, 112, "Cu²⁺", size=11, c="b"), text(60, 150, "Cu²⁺", size=11, c="b"),
+         '<g class="ed">' + "".join(f'<circle cx="{108 + i * 3}" cy="{100 + i * 14}" r="2.6" fill="#dc2626"/>' for i in range(3)) + '</g>',
+         text(110, 200, "Zn 失去电子，Cu 析出在锌片上", anchor="middle", size=10.5, c="s")]
+    s += [text(210, 40, "Zn → Zn²⁺ + 2e⁻", weight=700, c="r"), text(380, 40, "氧化（失电子）", c="r", size=11),
+          text(210, 64, "Cu²⁺ + 2e⁻ → Cu", weight=700, c="b"), text(380, 64, "还原（得电子）", c="b", size=11),
+          text(210, 92, "Zn：被氧化 → 是还原剂", size=11.5), text(210, 110, "Cu²⁺：被还原 → 是氧化剂", size=11.5),
+          text(210, 140, "OIL RIG：Oxidation Is Loss，Reduction Is Gain", size=11.5, weight=700, c="p")]
+    ox, y = 210, 178
+    s.append(f'<line x1="{ox}" y1="{y}" x2="{ox + 340}" y2="{y}" stroke="#1f2937" stroke-width="1.5"/>')
+    for k, n in enumerate(range(-2, 8)):
+        x = ox + 10 + k * 36
+        s.append(f'<line x1="{x}" y1="{y - 4}" x2="{x}" y2="{y + 4}" stroke="#1f2937"/>' + text(x, y + 18, f"{n:+d}" if n else "0", size=10, anchor="middle"))
+    s += [arrow(p, ox + 120, y - 10, ox + 200, y - 10, "r", 2), text(ox + 160, y - 16, "氧化：氧化数升高", size=10, c="r", anchor="middle"),
+          arrow(p, ox + 300, y - 10, ox + 230, y - 10, "b", 2), text(ox + 300, y - 16, "还原：降低", size=10, c="b", anchor="end")]
+    return fig(svg(p, 580, 212, "".join(s)), "锌片放进 CuSO₄ 溶液：Zn 被氧化、Cu²⁺ 被还原（动画中电子从 Zn 转移给 Cu²⁺）", style=css)
+
+
+def c31_cell():
+    p = "c31"
+    s = ['<path d="M30 80 V190 H170 V80" fill="none" stroke="#1f2937" stroke-width="2"/>', '<rect x="32" y="110" width="136" height="78" fill="#e5e7eb" opacity=".8"/>',
+         '<path d="M330 80 V190 H470 V80" fill="none" stroke="#1f2937" stroke-width="2"/>', '<rect x="332" y="110" width="136" height="78" fill="#bfdbfe" opacity=".8"/>',
+         '<rect x="88" y="60" width="20" height="110" fill="#9ca3af" stroke="#1f2937"/>', '<rect x="392" y="60" width="20" height="110" fill="#b45309" stroke="#1f2937"/>',
+         '<path d="M140 150 V95 H360 V150" fill="none" stroke="#d97706" stroke-width="16" stroke-linejoin="round" opacity=".55"/>',
+         text(250, 90, "盐桥 salt bridge（离子移动）", size=10.5, anchor="middle"),
+         '<path d="M98 60 V30 H230 M270 30 H402 V60" fill="none" stroke="#1f2937" stroke-width="2"/>',
+         '<circle cx="250" cy="30" r="18" fill="#fff" stroke="#1f2937" stroke-width="2"/>', text(250, 35, "V", anchor="middle", weight=700),
+         '<path d="M110 22 H228" stroke="#dc2626" stroke-width="2.4" fill="none" class="flow"/>', '<path d="M272 22 H392" stroke="#dc2626" stroke-width="2.4" fill="none" class="flow"/>',
+         arrow(p, 160, 14, 200, 14, "r", 2), text(150, 10, "e⁻", c="r", size=11),
+         text(98, 206, "Zn 阳极（−）：氧化", anchor="middle", size=11, weight=700),
+         text(98, 222, "Zn → Zn²⁺ + 2e⁻", anchor="middle", size=10.5),
+         text(402, 206, "Cu 阴极（+）：还原", anchor="middle", size=11, weight=700),
+         text(402, 222, "Cu²⁺ + 2e⁻ → Cu", anchor="middle", size=10.5),
+         text(140, 140, "Zn²⁺", size=10, c="s"), text(430, 140, "Cu²⁺", size=10, c="b")]
+    s += [text(490, 60, "原电池：", size=11, weight=700), text(490, 76, "化学能→电能", size=10.5),
+          text(490, 104, "E°cell", size=11, weight=700), text(490, 120, "= 0,34 − (−0,76)", size=10.5), text(490, 136, "= 1,10 V", size=10.5, weight=700),
+          text(490, 168, "An Ox,", size=11, c="p", weight=700), text(490, 184, "Red Cat", size=11, c="p", weight=700)]
+    return fig(svg(p, 590, 230, "".join(s)), "Zn–Cu 原电池：电子经导线从阳极流向阴极（屏幕上红线流动），盐桥中移动的是离子", anim=False)
+
+
 FIGS = {
     "p01": p01_vectors, "p03": p03_distance, "p05": p05_chase, "p07": p07_graphs, "p09": p09_fbd, "p11": p11_incline,
     "p13": p13_connected, "p15": p15_gravity, "p17": p17_contact, "p19": p19_field, "p21": p21_series_parallel, "p23": p23_emf,
     "c02": c02_dative, "c04": c04_vsepr, "c06": c06_imf, "c08": c08_bp, "c10": c10_kmt, "c12": c12_real, "c14": c14_profile,
     "c16": c16_molemap, "c18": c18_flow, "c20": c20_sandwich, "c22": c22_naming, "c24": c24_groups,
-    "p25": p25_faraday, "p26": p26_lenz, "p27": p27_zero,
+    "p25": p25_faraday, "p26": p26_lenz, "p27": p27_zero, "p28": p28_vertical,
+    "c29": c29_rates, "c30": c30_redox, "c31": c31_cell,
 }
 EXFIGS = {"ex07": ex07_vt, "ex21": ex21_circuit}

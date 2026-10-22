@@ -441,4 +441,31 @@ dict(code="p27", zh="静电专练：比例推理、零场点、电子转移", en
       ("27.4", f"Q<sub>末</sub> = (−6 − 2)/2 = −4 pC {OK}；A：ΔQ = −4 − (−6) = +2 pC，A 失去电子 {OK}；n = 2 × 10⁻¹²/1,6 × 10⁻¹⁹ = 1,25 × 10⁷ 个 {OK}；从 A 转移到 B {OK}"),
       ("27.5", f"两条都是随距离迅速下降的曲线（反平方） {OK}；+4 nC 的曲线在每个距离处都更高 {OK}；曲线不与坐标轴相交，标出两条曲线 {OK}"),
       ("27.6", f"过原点的直线 {OK}；斜率 = q（电荷量） {OK}")]),
+# ------------------------------------------------------------------ P28
+dict(code="p28", zh="运动学④：竖直运动与自由落体", en="Kinematics IV — vertical motion & free fall",
+ bridge="Day 05 的运动方程 + Day 07 的运动图像",
+ warm=[("物体竖直上抛，到达最高点时速度是多少？", 1), ("从静止开始下落 2 s 后，速度是多少？（g = 9,8 m·s⁻²）", 1)],
+ learn="""
+<p><b>自由落体 free fall</b>：只受重力作用的运动（忽略空气阻力）。无论物体向上、向下还是在最高点，加速度都是 <b>g = 9,8 m·s⁻²，方向竖直向下</b>。</p>
+<p><b>先规定正方向</b>（例如向上为正，则 a = −9,8 m·s⁻²），然后直接用 Day 05 的四个运动方程。最高点：v = 0，但 a 仍是 9,8 m·s⁻² 向下。回到抛出点所需时间 = 上升时间 × 2。</p>
+<p><b>弹跳球图像</b>（向上为正）：v–t 图由<b>斜率相同（= −9,8）</b>的平行直线组成，触地瞬间速度由负跳变为正；位置–时间图是一段段开口向下的抛物线，触地时位置为 0。v–t 图斜率求 g，面积求下落高度。</p>
+<p><b>受力图</b>：空中的球（上升、下降、最高点都一样）只画一个力：重力 w，竖直向下。</p>""",
+ formulas=[M("v = u + aΔt"), M("Δx = uΔt + ½aΔt²"), M("v² = u² + 2aΔx"), "自由落体：" + M("a = g = 9,8 m·s⁻²") + "（向下）"],
+ pitfalls=["<b>最高点写 a = 0</b>：最高点 v = 0，但加速度仍是 9,8 m·s⁻² 向下。",
+           "<b>正负号前后不一致</b>：先写“取向上为正”，向下的速度、位移和 g 都代负值。",
+           "<b>上升时的受力图多画一个“向上的力”</b>：离手以后只有重力。"],
+ defs=[("Free fall", "自由落体", "Motion in which the only force acting on an object is the gravitational force."),
+       ("Projectile", "抛体", "An object upon which the only force acting is the force of gravity.")],
+ ex=[dict(n="28.1", lv=1, q="A stone is dropped from rest from the top of a 45 m cliff. Ignore air resistance. Calculate (a) the time it takes to reach the ground and (b) its speed just before it lands.", mk=4, ln=3),
+     dict(n="28.2", lv=1, q="A ball is thrown vertically upward at 14,7 m·s⁻¹. Calculate (a) the time to reach its highest point (2) and (b) the maximum height (3).", mk=5, ln=4),
+     dict(n="28.3", lv=2, q="Write down the velocity and the acceleration of the ball in 28.2 at its highest point.", mk=2, ln=1),
+     dict(n="28.4", lv=2, q="Draw a labelled free-body diagram for the ball in 28.2 while it is moving upward.", mk=2, ln=0, box=18),
+     dict(n="28.5", lv=3, q="On planet X (no atmosphere) a ball is dropped from rest and hits the ground after 1,2 s at 6 m·s⁻¹. (a) Calculate g on planet X. (2)　(b) Calculate the height from which it was dropped. (2)　(c) Planet X has the same mass as the Earth. Express its radius in terms of the Earth’s radius R. (3)", mk=7, ln=5)],
+ ans_warm=["0 m·s⁻¹", "v = 0 + 9,8 × 2 = 19,6 m·s⁻¹（向下）"],
+ ans=[("28.1", f"取向下为正。(a) Δx = uΔt + ½aΔt²：45 = 0 + ½(9,8)Δt² {OK} → Δt = 3,03 s {OK}　(b) v = u + aΔt = 0 + 9,8 × 3,03 {OK} = 29,70 m·s⁻¹ {OK}"),
+      ("28.2", f"取向上为正。(a) 0 = 14,7 + (−9,8)Δt {OK} → Δt = 1,5 s {OK}　(b) 0 = 14,7² + 2(−9,8)Δx {OK}{OK} → Δx = 11,03 m {OK}"),
+      ("28.3", f"v = 0 {OK}；a = 9,8 m·s⁻² 竖直向下 {OK}"),
+      ("28.4", f"只有一个力：重力 w（或 F<sub>g</sub>） {OK}，竖直向下 {OK}"),
+      ("28.5", f"(a) g = Δv/Δt = 6/1,2 {OK} = 5 m·s⁻² {OK}　(b) Δx = ½(5)(1,2)² = 3,6 m（或 v–t 图面积 ½ × 1,2 × 6） {OK}{OK}<br>"
+               f"(c) g = GM/r²，M 相同 → g ∝ 1/r² {OK}；r<sub>X</sub>² / R² = 9,8/5 {OK} → r<sub>X</sub> = 1,40 R {OK}")]),
 ]

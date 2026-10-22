@@ -350,3 +350,99 @@ dict(code="c24", zh="有机②：官能团与同分异构", en="Organic II — f
       ("24.4", f"propanoic acid CH₃CH₂COOH {OK}{OK}；methyl ethanoate CH₃COOCH₃（或 ethyl methanoate HCOOCH₂CH₃） {OK}{OK}"),
       ("24.5", f"ethanoic acid 乙酸 {OK}；propan-1-ol（1-丙醇） {OK}")]),
 ]
+
+# 对照 IEB Grade 11 考纲（Paper 2 含“能量变化与反应速率”“电化学”）补齐的化学日
+CHEM_EXTRA = [
+# ------------------------------------------------------------------ C29
+dict(code="c29", zh="反应速率与碰撞理论", en="Rates of reaction & collision theory",
+ bridge="Day 14 的活化能 + Day 10 的分子运动论",
+ warm=[("20 s 内质量减少了 5 g，平均每秒减少多少？", 1), ("温度升高时，分子的平均动能怎样变化？", 1)],
+ learn="""
+<p><b>反应速率</b> = 单位时间内反应物或生成物的量（浓度、质量、气体体积）的变化，如 Δc/Δt（mol·dm⁻³·s⁻¹）、Δm/Δt（g·s⁻¹）、ΔV/Δt（cm³·s⁻¹）。</p>
+<p><b>碰撞理论</b>：粒子必须<b>有效碰撞</b>才会反应，即能量 ≥ 活化能 Ea，且方向（取向）正确。</p>
+<ul class="tight"><li><b>浓度 / 气体压强</b>↑ → 单位体积粒子更多 → 每秒有效碰撞更多。</li>
+<li><b>表面积</b>↑（粉末）→ 暴露的粒子更多 → 碰撞更多。</li>
+<li><b>温度</b>↑ → 平均动能增大，<b>能量 ≥ Ea 的粒子比例增大</b>（主要原因）→ 有效碰撞更多。</li>
+<li><b>催化剂</b> → 提供 Ea 更低的路径 → 更多粒子能量足够；不改变生成物的总量。</li></ul>
+<p><b>速率图</b>：生成物–时间曲线的斜率 = 速率，开始最陡，逐渐变平，限量试剂用完后水平。限量试剂的量相同时，最终产量相同。</p>""",
+ formulas=[M("速率 = " + FR("Δ(量)", "Δt")), "速率 ∝ " + M(FR("1", "t")) + "（计时实验）"],
+ pitfalls=["<b>温度升高只写“碰撞更多”</b>：必须写“更多粒子的能量 ≥ Ea → 有效碰撞更多”。",
+           "<b>说催化剂使生成物更多</b>：催化剂只加快速率，最终产量由限量试剂决定。",
+           "<b>Maxwell–Boltzmann 曲线画错</b>：温度高时曲线更低更宽、峰右移，曲线下总面积不变。"],
+ defs=[("Reaction rate", "反应速率", "The change in concentration (or amount) of reactants or products per unit time."),
+       ("Collision theory", "碰撞理论", "Particles react only when they collide effectively: with sufficient energy (at least the activation energy) and with the correct orientation.")],
+ ex=[dict(n="29.1", lv=1, q="Define reaction rate.", mk=2, ln=1),
+     dict(n="29.2", lv=1, q="Marble chips react with excess HCl and the mass of the flask decreases by 0,88 g (CO₂ lost) in the first 40 s. Calculate the average rate in (a) g·s⁻¹ and (b) mol CO₂ per second.", mk=4, ln=3),
+     dict(n="29.3", lv=2, q="Use the collision theory to explain why increasing the temperature increases the rate of a reaction.", mk=3, ln=3),
+     dict(n="29.4", lv=2, q="Equal masses of powdered and lump CaCO₃ react with excess HCl. Which reacts faster? Will the final volume of CO₂ be different? Explain.", mk=3, ln=3),
+     dict(n="29.5", lv=2, q="Sketch Maxwell–Boltzmann energy distribution curves for a gas at T₁ and at a higher temperature T₂. Mark Ea and shade the region showing particles that can react at T₂.", mk=3, ln=0, box=22),
+     dict(n="29.6", lv=3, q="In an investigation, Na₂S₂O₃ reacts with HCl and the time for a cross under the flask to disappear is measured for different Na₂S₂O₃ concentrations. (a) Name the independent, dependent and one controlled variable. (3)　(b) How is the rate related to the measured time? (1)", mk=4, ln=2)],
+ ans_warm=["5 ÷ 20 = 0,25 g·s⁻¹", "增大"],
+ ans=[("29.1", f"单位时间内反应物或生成物浓度（或量）的变化 {OK}{OK}"),
+      ("29.2", f"(a) 0,88/40 {OK} = 0,022 g·s⁻¹ {OK}　(b) n(CO₂) = 0,88/44 = 0,02 mol {OK}；0,02/40 = 5 × 10⁻⁴ mol·s⁻¹ {OK}"),
+      ("29.3", f"温度升高，粒子平均动能增大 {OK}；能量 ≥ Ea 的粒子比例增大 {OK}；单位时间内有效碰撞增多，速率增大 {OK}"),
+      ("29.4", f"粉末更快 {OK}：表面积更大，单位时间碰撞更多 {OK}；CO₂ 最终体积相同，因为 CaCO₃ 的量相同（HCl 过量） {OK}"),
+      ("29.5", f"两条从原点开始、向右拖尾的曲线，T₂ 的峰更低且右移 {OK}；标出 Ea 竖线 {OK}；阴影为 T₂ 曲线下 Ea 右侧的面积（比 T₁ 大） {OK}"),
+      ("29.6", f"(a) 自变量：Na₂S₂O₃ 浓度 {OK}；因变量：十字消失的时间（反应速率） {OK}；控制变量：温度 / HCl 浓度和体积 / 总体积 任一 {OK}　(b) 速率与时间成反比（速率 ∝ 1/t） {OK}")]),
+
+# ------------------------------------------------------------------ C30
+dict(code="c30", zh="氧化还原：氧化数与半反应", en="Redox — oxidation numbers & half-reactions",
+ bridge="Day 02 的离子与电子转移",
+ warm=[("Cl 原子得到 1 个电子变成什么离子？", 1), ("Mg 原子失去 2 个电子变成什么离子？", 1)],
+ learn="""
+<p><b>氧化 oxidation</b> = 失去电子（氧化数升高）；<b>还原 reduction</b> = 得到电子（氧化数降低）。口诀 <b>OIL RIG</b>：Oxidation Is Loss, Reduction Is Gain。</p>
+<p><b>氧化剂</b>本身被还原（接受电子）；<b>还原剂</b>本身被氧化（给出电子）。例：Zn + Cu²⁺ → Zn²⁺ + Cu 中，Zn 被氧化、是还原剂；Cu²⁺ 被还原、是氧化剂。</p>
+<p><b>氧化数规则</b>：单质 = 0；单原子离子 = 离子电荷；化合物中 O 通常 −2（过氧化物中 −1），H 通常 +1；第 1 族 +1，第 2 族 +2，F 为 −1；化合物中各元素氧化数之和 = 0，多原子离子中 = 离子电荷。</p>
+<p><b>半反应</b>：Zn → Zn²⁺ + 2e⁻（氧化）；Cu²⁺ + 2e⁻ → Cu（还原）。合并前先使两边电子数相等。<b>标准还原电位 E°</b>越正，氧化剂越强：氧化剂所在半反应的 E° 比还原剂所在半反应的 E° 更正时，反应才自发进行。</p>""",
+ formulas=["OIL RIG", "化合物：氧化数之和 = 0", "多原子离子：氧化数之和 = 离子电荷"],
+ pitfalls=["<b>把“氧化剂”和“被氧化的物质”搞混</b>：氧化剂是被<b>还原</b>的那一个。",
+           "<b>半反应合并时电子没配平</b>：Ag⁺ + e⁻ → Ag 要 ×2 才能和 Mg → Mg²⁺ + 2e⁻ 相加。",
+           "<b>H₂O₂ 中 O 写成 −2</b>：过氧化物中 O 为 −1。"],
+ defs=[("Oxidation", "氧化", "A loss of electrons (an increase in oxidation number)."),
+       ("Reduction", "还原", "A gain of electrons (a decrease in oxidation number)."),
+       ("Oxidising agent", "氧化剂", "A substance that is reduced (it gains electrons)."),
+       ("Reducing agent", "还原剂", "A substance that is oxidised (it loses electrons).")],
+ ex=[dict(n="30.1", lv=1, q="Determine the oxidation number of: (a) S in H₂SO₄ (b) Mn in KMnO₄ (c) Cr in Cr₂O₇²⁻ (d) N in NH₄⁺ (e) O in H₂O₂", mk=5, ln=2),
+     dict(n="30.2", lv=1, q="Zn + CuSO₄ → ZnSO₄ + Cu. Identify (a) the substance oxidised (b) the substance reduced (c) the oxidising agent (d) the reducing agent.", mk=4, ln=2),
+     dict(n="30.3", lv=2, q="Magnesium reacts with silver ions. Write the oxidation half-reaction, the reduction half-reaction and the balanced net ionic equation.", mk=4, ln=3),
+     dict(n="30.4", lv=2, q="Is NaOH + HCl → NaCl + H₂O a redox reaction? Explain using oxidation numbers.", mk=2, ln=2),
+     dict(n="30.5", lv=3, q="Use E° values (Ag⁺/Ag +0,80 V; Cu²⁺/Cu +0,34 V; Zn²⁺/Zn −0,76 V) to predict whether a reaction takes place when (a) copper is placed in AgNO₃(aq) (b) copper is placed in ZnSO₄(aq). Explain each.", mk=4, ln=4)],
+ ans_warm=["Cl⁻", "Mg²⁺"],
+ ans=[("30.1", f"(a) +6 {OK}　(b) +7 {OK}　(c) +6 {OK}　(d) −3 {OK}　(e) −1 {OK}"),
+      ("30.2", f"(a) Zn {OK}　(b) Cu²⁺ {OK}　(c) Cu²⁺（CuSO₄） {OK}　(d) Zn {OK}"),
+      ("30.3", f"Mg → Mg²⁺ + 2e⁻ {OK}；Ag⁺ + e⁻ → Ag {OK}；Mg + 2Ag⁺ → Mg²⁺ + 2Ag {OK}{OK}"),
+      ("30.4", f"不是 {OK}；反应前后所有元素的氧化数都没有改变（Na +1、O −2、H +1、Cl −1），这是酸碱中和 {OK}"),
+      ("30.5", f"(a) 会反应 {OK}：Ag⁺（+0,80 V）是比 Cu²⁺（+0,34 V）更强的氧化剂，能氧化 Cu，析出 Ag {OK}<br>"
+               f"(b) 不反应 {OK}：Zn²⁺（−0,76 V）是比 Cu²⁺ 更弱的氧化剂，不能氧化 Cu {OK}")]),
+
+# ------------------------------------------------------------------ C31
+dict(code="c31", zh="电化学电池：原电池与电解池", en="Electrochemical cells — galvanic & electrolytic",
+ bridge="Day 30 的半反应 + Day 21 的电路",
+ warm=[("写出 Zn 被氧化的半反应。", 1), ("写出 Cu²⁺ 被还原的半反应。", 1)],
+ learn="""
+<p><b>原电池 galvanic cell</b>：自发的氧化还原反应，<b>化学能 → 电能</b>（例：Zn–Cu 电池）。<b>电解池 electrolytic cell</b>：外接电源迫使非自发反应发生，<b>电能 → 化学能</b>（例：电解 CuCl₂ 溶液）。</p>
+<p><b>两种电池都是：阳极 anode 发生氧化，阴极 cathode 发生还原</b>（口诀 “An Ox, Red Cat”）。原电池中阳极为负极、阴极为正极；电解池中阳极接电源正极。外电路中<b>电子从阳极流向阴极</b>。</p>
+<p><b>盐桥</b>：连通电路，并让离子移动以保持两边溶液电中性（阴离子移向阳极一侧）。盐桥里移动的是离子，不是电子。</p>
+<p><b>电池符号</b>：阳极写左边，Zn | Zn²⁺(1 mol·dm⁻³) || Cu²⁺(1 mol·dm⁻³) | Cu。<b>标准电动势</b> E°<sub>cell</sub> = E°<sub>cathode</sub> − E°<sub>anode</sub>，为正值说明反应自发。标准条件：1 mol·dm⁻³、25 °C（298 K）、101,3 kPa。</p>""",
+ formulas=[M("E°<sub>cell</sub> = E°<sub>cathode</sub> − E°<sub>anode</sub>"), "An Ox, Red Cat", "e⁻：阳极 → 阴极（外电路）"],
+ pitfalls=["<b>原电池和电解池的正负极记混</b>：阳极永远发生氧化；原电池阳极为负，电解池阳极接正。",
+           "<b>说电子经过盐桥</b>：电子只走导线，盐桥里移动的是离子。",
+           "<b>E°<sub>cell</sub> 相减顺序反了</b>：阴极减阳极；结果为负说明不自发。"],
+ defs=[("Galvanic cell", "原电池", "A cell in which chemical energy is converted into electrical energy by a spontaneous redox reaction."),
+       ("Electrolytic cell", "电解池", "A cell in which electrical energy is converted into chemical energy (a non-spontaneous reaction is driven by an external power source)."),
+       ("Anode", "阳极", "The electrode where oxidation takes place."),
+       ("Cathode", "阴极", "The electrode where reduction takes place.")],
+ ex=[dict(n="31.1", lv=1, q="Define (a) anode and (b) cathode.", mk=2, ln=2),
+     dict(n="31.2", lv=1, q="For a standard Zn–Cu galvanic cell: (a) identify the anode (1); (b) write the half-reaction at the cathode (2); (c) state the direction of electron flow in the external circuit (1).", mk=4, ln=3),
+     dict(n="31.3", lv=2, q="Calculate E°<sub>cell</sub> for the standard Zn–Cu cell (Zn²⁺/Zn −0,76 V; Cu²⁺/Cu +0,34 V).", mk=3, ln=2),
+     dict(n="31.4", lv=2, q="A galvanic cell is made from Mg | Mg²⁺ (E° = −2,37 V) and Ag⁺ | Ag (E° = +0,80 V) half-cells. Write the cell notation and calculate E°<sub>cell</sub>.", mk=4, ln=3),
+     dict(n="31.5", lv=2, q="State TWO functions of the salt bridge.", mk=2, ln=2),
+     dict(n="31.6", lv=3, q="CuCl₂(aq) is electrolysed using inert carbon electrodes. Name the product formed and write the half-reaction (a) at the cathode (2) and (b) at the anode (2).", mk=4, ln=3)],
+ ans_warm=["Zn → Zn²⁺ + 2e⁻", "Cu²⁺ + 2e⁻ → Cu"],
+ ans=[("31.1", f"(a) 发生氧化的电极 {OK}　(b) 发生还原的电极 {OK}"),
+      ("31.2", f"(a) Zn 电极 {OK}　(b) Cu²⁺ + 2e⁻ → Cu {OK}{OK}　(c) 从 Zn 经导线流向 Cu {OK}"),
+      ("31.3", f"E°<sub>cell</sub> = E°<sub>cathode</sub> − E°<sub>anode</sub> {OK} = 0,34 − (−0,76) {OK} = +1,10 V {OK}"),
+      ("31.4", f"Mg | Mg²⁺ || Ag⁺ | Ag {OK}{OK}；E°<sub>cell</sub> = 0,80 − (−2,37) {OK} = +3,17 V {OK}"),
+      ("31.5", f"连通电路（完成回路） {OK}；让离子移动，保持两边溶液电中性 {OK}"),
+      ("31.6", f"(a) 铜 Cu {OK}：Cu²⁺ + 2e⁻ → Cu {OK}　(b) 氯气 Cl₂ {OK}：2Cl⁻ → Cl₂ + 2e⁻ {OK}")]),
+]
