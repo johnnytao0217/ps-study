@@ -13,6 +13,8 @@ body{margin:0;background:var(--desk);color:var(--ink);
 a{color:var(--accent)}
 .m{font-family:"Times New Roman",Times,serif;font-style:italic;white-space:nowrap}
 .m b,.m .u{font-style:normal}
+sub,sup{font-size:.72em;line-height:0;position:relative;vertical-align:baseline}
+sub{bottom:-.25em}sup{top:-.45em}
 .fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 2px;font-size:.92em}
 .fr>i{font-style:inherit;padding:0 3px}
 .fr>i:first-child{border-bottom:1px solid currentColor}

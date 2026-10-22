@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """生成静态网站：python3 src/build.py（输出到仓库根目录）"""
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -24,6 +25,37 @@ def subj_zh(d):
     return "物理 P1" if subj(d) == "phy" else "化学 P2"
 
 
+# Unicode 上下标（₁₂、⁻² 等）在中文字体里字宽不一、数字会被拉开（C₆H₁₂ 显示成 H₁ ₂），
+# 所以统一改成 HTML <sub>/<sup>；SVG 里改成 <tspan>。只处理文字，不碰标签和属性。
+SUB = dict(zip("₀₁₂₃₄₅₆₇₈₉₊₋ₐₑₒₓₕₖₗₘₙₚₛₜ", "0123456789+−aeoxhklmnpst"))
+SUP = dict(zip("⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻ⁿⁱ", "0123456789+−ni"))
+RUN = re.compile("([%s]+)|([%s]+)" % ("".join(SUB), "".join(SUP)))
+
+
+def scripts(html):
+    out, in_svg = [], 0
+    for part in re.split(r"(<[/!a-zA-Z][^>]*>)", html):
+        if part[:1] == "<" and len(part) > 1 and (part[1].isalpha() or part[1] in "/!"):
+            t = part[1:5].lower()
+            if t.startswith("svg"):
+                in_svg += 1
+            elif t.startswith("/svg"):
+                in_svg -= 1
+            out.append(part)
+            continue
+
+        def rep(m):
+            if m.group(1):
+                txt, tag = "".join(SUB[c] for c in m.group(1)), "sub"
+            else:
+                txt, tag = "".join(SUP[c] for c in m.group(2)), "sup"
+            if in_svg:
+                return f'<tspan class="{tag}" style="font-size:72%;baseline-shift:{"-22%" if tag == "sub" else "38%"}">{txt}</tspan>'
+            return f"<{tag}>{txt}</{tag}>"
+        out.append(RUN.sub(rep, part))
+    return "".join(out)
+
+
 def page(title, body, rel="", cls="", bar=""):
     return f"""<!doctype html>
 <html lang="zh-CN">
@@ -36,7 +68,7 @@ def page(title, body, rel="", cls="", bar=""):
 </head>
 <body class="{cls}">
 {bar}
-{body}
+{scripts(body)}
 <script src="{rel}assets/fig.js"></script>
 </body>
 </html>

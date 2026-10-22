@@ -32,6 +32,11 @@ def path(dstr, c="k", w=2.2, d=None, length=None, fill="none", dash=False, cls=N
     return f'<path d="{dstr}" stroke="{COL.get(c, c)}" stroke-width="{w}" fill="{fill}"{da}{c_}{st(d, extra)}/>'
 
 
+def sb(t):
+    """SVG 下标（字母下标没有对应的 Unicode 字符时用，如 m_A）"""
+    return f'<tspan class="sub" style="font-size:72%;baseline-shift:-22%">{t}</tspan>'
+
+
 def text(x, y, s, d=None, size=None, c="k", anchor="start", weight=None, cls=""):
     a = []
     if size:
@@ -247,7 +252,7 @@ def p09_fbd():
         arrow(p, fx, cy, fx, fy, "g", 1.6, d=3.0, dash=True), text(fx + 6, (cy + fy) / 2, "F sinθ", d=3.0, c="g", cls="m"),
         text(cx + 36, cy - 4, "θ", cls="m", c="g"),
         text(30, 20, "竖直方向（不动）：N + F sinθ = mg → N = mg − F sinθ", d=3.6, size=11.5, weight=700),
-        text(30, 38, "水平方向：F_net = F cosθ − f = ma，其中 f = μk N", d=3.6, size=11.5, weight=700),
+        text(30, 38, f"水平方向：F{sb('net')} = F cosθ − f = ma，其中 f = μ{sb('k')}N", d=3.6, size=11.5, weight=700),
     ]
     return fig(svg(p, 520, 260, "".join(s)), "受力图 free-body diagram：所有箭头从物体中心画出；斜拉时 N 不等于 mg")
 
@@ -303,12 +308,12 @@ def p13_connected():
         f'<g class="mb"><rect x="{tx - 10}" y="{ty + 70}" width="46" height="50" fill="#fecaca" stroke="#1f2937" stroke-width="2"/>'
         f'{text(tx + 13, ty + 100, "B 2 kg", anchor="middle", size=11, weight=700)}'
         f'{arrow(p, tx + 13, ty + 70, tx + 13, ty + 34, "g", 2.4)}{text(tx + 20, ty + 52, "T", c="g", cls="m")}'
-        f'{arrow(p, tx + 13, ty + 120, tx + 13, ty + 160, "k", 2.4)}{text(tx + 20, ty + 158, "w = m_B g", size=11)}</g>',
+        f'{arrow(p, tx + 13, ty + 120, tx + 13, ty + 160, "k", 2.4)}{text(tx + 20, ty + 158, "w = m" + sb("B") + "g", size=11)}</g>',
     ]
     s += [text(400, 30, "连接体 connected bodies", weight=700),
           text(400, 50, "同一根轻绳：两边张力 T 相同"), text(400, 68, "两块一起动：加速度 a 相同"),
-          text(400, 96, "A：T − f = m_A a", c="b"), text(400, 114, "B：m_B g − T = m_B a", c="r"),
-          text(400, 132, "两式相加消去 T："), text(400, 150, "m_B g − f = (m_A + m_B) a", weight=700)]
+          text(400, 96, f"A：T − f = m{sb('A')}a", c="b"), text(400, 114, f"B：m{sb('B')}g − T = m{sb('B')}a", c="r"),
+          text(400, 132, "两式相加消去 T："), text(400, 150, f"m{sb('B')}g − f = (m{sb('A')} + m{sb('B')})a", weight=700)]
     return fig(svg(p, 580, 270, "".join(s)), "B 向下拉，A 向右滑；分别给每个物体画受力图、各列一个方程", style=css)
 
 
@@ -560,7 +565,7 @@ def c06_imf():
         s.append(text(x, y + 4, "O", anchor="middle", size=13, c="b", weight=700))
         s.append(f'<line x1="{495 + 18 * math.cos(a):.1f}" y1="{80 + 18 * math.sin(a):.1f}" x2="{495 + 32 * math.cos(a):.1f}" y2="{80 + 32 * math.sin(a):.1f}" stroke="#7c3aed" stroke-dasharray="2 2" stroke-width="1.6"/>')
     s.append(text(495, 146, "离子溶于水", anchor="middle", size=10.5, c="s") + text(495, 160, "O(δ−) 朝向 Na⁺", anchor="middle", size=10.5, c="s"))
-    s.append(text(20, 184, "强度：London（同等大小时最弱）< 偶极-偶极 < 氢键 < 离子-偶极；分子间力 ≪ 分子内的化学键", size=11.5, weight=700))
+    s.append(text(20, 184, "强度：London（同等大小时最弱）&lt; 偶极-偶极 &lt; 氢键 &lt; 离子-偶极；分子间力 ≪ 分子内的化学键", size=11.5, weight=700))
     s.append(text(20, 202, "注意：London 力随电子数（分子大小）增加而变强，大分子的 London 力可以超过小分子的偶极力", size=11, c="s"))
     return fig(svg(p, 560, 210, "".join(s)), "四种分子间作用力 intermolecular forces", style=css)
 
@@ -642,7 +647,7 @@ def c14_profile():
           arrow(p, ox + 70, R, ox + 70, peak + 2, "r", 2, d=1.3), f'<line x1="{ox + 60}" y1="{peak}" x2="{ox + 175}" y2="{peak}" stroke="#9ca3af" stroke-dasharray="3 3"/>',
           text(ox + 64, 80, "Ea", c="r", anchor="end", weight=700, d=1.3),
           arrow(p, ox + 300, R, ox + 300, Pd - 2, "b", 2, d=1.8), f'<line x1="{ox + 90}" y1="{R}" x2="{ox + 310}" y2="{R}" stroke="#9ca3af" stroke-dasharray="3 3"/>',
-          text(ox + 306, 142, "ΔH < 0", c="b", weight=700, d=1.8),
+          text(ox + 306, 142, "ΔH &lt; 0", c="b", weight=700, d=1.8),
           path(cat, "g", 2.2, d=2.4, length=300, dash=False),
           text(ox + 222, 70, "绿线：加催化剂", c="g", size=11, d=2.6), text(ox + 222, 86, "Ea 变小", c="g", size=11, d=2.6)]
     s += [text(400, 40, "放热反应 exothermic", weight=700, c="b"), text(400, 58, "生成物能量更低，ΔH 为负", size=11.5),
@@ -658,7 +663,7 @@ def c16_molemap():
     s = [f'<circle cx="{cx}" cy="{cy}" r="36" fill="#fde68a" stroke="#b45309" stroke-width="2.4"/>',
          text(cx, cy - 2, "n", anchor="middle", size=24, cls="m", weight=700), text(cx, cy + 18, "mol", anchor="middle", size=11)]
     nodes = [(80, 105, "质量 m (g)", "n = m/M", "÷M", "×M"), (460, 105, "粒子数 N", "N = n·N_A", "×N_A", "÷N_A"),
-             (270, 18, "气体体积 V (dm³)", "n = V/V_m（STP: 22,4）", "", ""), (270, 192, "溶液 c, V (dm³)", "n = cV", "", "")]
+             (270, 18, "气体体积 V (dm³)", f"n = V/V{sb('m')}（STP: 22,4）", "", ""), (270, 192, "溶液 c, V (dm³)", "n = cV", "", "")]
     for i, (x, y, lab, f, a1, a2) in enumerate(nodes):
         s.append(g(f'<rect x="{x - 70}" y="{y - 16}" width="140" height="32" rx="16" fill="#fff" stroke="#b45309" stroke-width="2"/>'
                    + text(x, y + 5, lab, anchor="middle", weight=700, size=12), d=0.3 + i * 0.4))
@@ -821,7 +826,7 @@ def p26_lenz():
           text(530, 30, "副线圈 Nₛ", size=11, c="b", anchor="middle"),
           text(430, 104, "铁芯中磁通", size=11, anchor="middle"), text(430, 120, "不断变化", size=11, anchor="middle"),
           text(330, 190, "Vₛ/Vₚ = Nₛ/Nₚ；只能用交流 AC", size=11.5, weight=700),
-          text(330, 208, "Nₛ > Nₚ 升压；Nₛ < Nₚ 降压", size=11)]
+          text(330, 208, "Nₛ &gt; Nₚ 升压；Nₛ &lt; Nₚ 降压", size=11)]
     return fig(svg(p, 580, 216, "".join(s).replace(" > ", " &gt; ").replace(" < ", " &lt; ")),
                "左：楞次定律“来拒去留”；右：变压器（磁通变化才能在副线圈感应出电压）", style=css)
 
