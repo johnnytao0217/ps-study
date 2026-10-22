@@ -105,7 +105,7 @@ dict(code="p07", zh="运动学③：运动图像", en="Kinematics III — motion
  pitfalls=["<b>v-t 图面积在时间轴以下要算负</b>：求位移时相减，求路程时相加。",
            "<b>x-t 图的“下降”不是减速</b>：它表示往负方向运动。"],
  defs=[("Acceleration", "加速度", "The rate of change of velocity."),
-       ("Net force zero", "合力为零", "On a v-t graph this appears as a horizontal line (constant velocity, a = 0).")],
+       ("Instantaneous velocity", "瞬时速度", "The velocity of an object at a particular moment in time (the gradient of the x-t graph at that instant).")],
  exfig="ex07",
  ex=[dict(n="7.1", lv=1, q="Use the graph above. Calculate the acceleration of the car from 0 s to 5 s.", mk=3, ln=2),
      dict(n="7.2", lv=1, q="During which time interval is the resultant force on the car zero? Give a reason.", mk=2, ln=1),

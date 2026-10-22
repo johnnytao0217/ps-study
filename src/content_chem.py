@@ -31,9 +31,9 @@ dict(code="c02", zh="化学键：Lewis 结构、电负性、配位键", en="Chem
  ans_warm=["O：6；Na：1；Cl：7", "Mg²⁺（失去 2 个电子）"],
  ans=[("2.1", f"(a) 离子键 ionic {OK}　(b) 非极性共价键 non-polar covalent {OK}　(c) 极性共价键 polar covalent {OK}　(d) 金属键 metallic {OK}"),
       ("2.2", f"(a) N 周围 3 对共用电子 + 1 对孤对电子 {OK}{OK}　(b) O=C=O {OK}{OK}"),
-      ("2.3", f"ΔEN：O–H = 1,4；H–Cl = 0,9；C–H = 0,4 {OK}{OK}；所以 O–H > H–Cl > C–H {OK}"),
+      ("2.3", f"ΔEN：O–H = 1,4；H–Cl = 0,9；C–H = 0,4 {OK}{OK}；所以 O–H &gt; H–Cl &gt; C–H {OK}"),
       ("2.4", f"H₂O（O 上有孤对电子） + H⁺ → H₃O⁺ {OK}{OK}；O 的一对孤对电子与 H⁺ 共用 {OK}；配位共价键 dative covalent bond {OK}"),
-      ("2.5", f"键长：C–C > C=C > C≡C {OK}；键能：C≡C > C=C > C–C {OK}；共用的电子对越多（键级越高） {OK}，原子核与电子之间的吸引越强，原子靠得越近 {OK}")]),
+      ("2.5", f"键长：C–C &gt; C=C &gt; C≡C {OK}；键能：C≡C &gt; C=C &gt; C–C {OK}；共用的电子对越多（键级越高） {OK}，原子核与电子之间的吸引越强，原子靠得越近 {OK}")]),
 
 # ------------------------------------------------------------------ C04
 dict(code="c04", zh="分子形状 VSEPR 与分子极性", en="Molecular shape (VSEPR) & molecular polarity",
@@ -71,7 +71,7 @@ dict(code="c06", zh="分子间作用力的类型", en="Intermolecular forces —
 <li><b>偶极-偶极力</b>：极性分子之间，一个分子的 δ+ 吸引另一个分子的 δ−。</li>
 <li><b>氢键</b>：H 直接连在 <b>N、O 或 F</b> 上，并被另一分子 N/O/F 上的孤对电子吸引。是最强的“分子之间”的力。</li>
 <li><b>离子-偶极力</b>：离子溶解在极性溶剂中，例如 NaCl(aq)。</li></ul>""",
- formulas=["London < 偶极-偶极 < 氢键 < 离子-偶极（分子大小相近时）"],
+ formulas=["London &lt; 偶极-偶极 &lt; 氢键 &lt; 离子-偶极（分子大小相近时）"],
  pitfalls=["<b>说“CH₄ 有氢键”</b>：H 必须连在 N、O、F 上，C–H 不行。",
            "<b>把“打断共价键”当作沸腾</b>：水沸腾时 O–H 键没有断。",
            "<b>CaCl₂(s) 与 CaCl₂(aq)</b>：固态是离子键，水溶液才有离子-偶极力。"],
@@ -162,7 +162,7 @@ dict(code="c12", zh="理想气体方程与真实气体", en="Ideal gas equation 
 <ul class="tight"><li><b>高压</b>：分子挤得很近，分子本身的体积不能忽略；</li><li><b>低温</b>：分子运动变慢，分子间吸引力变得明显（接近液化）。</li></ul>
 <p>同一温度下，所有气体分子的<b>平均动能相同</b>：E<sub>k</sub> = ½mv²，所以质量小的分子（如 H₂、He）平均速度更大。</p>""",
  formulas=[M("pV = nRT"), M("n = " + FR("m", "M")), M("R = 8,31 J·K⁻¹·mol⁻¹")],
- pitfalls=["<b>pV = nRT 用了 kPa 和 dm³</b>：答案会差 10⁶ 倍。（例外：kPa 搭配 dm³ 时两者的 10³ 恰好抵消，但不建议依赖。）",
+ pitfalls=["<b>pV = nRT 单位混搭</b>：kPa 配 m³、或 Pa 配 dm³，答案会差 1 000 倍。最稳妥的做法：全部换成 Pa、m³、K 再代入。",
            "<b>只写“高压低温”不解释</b>：要说明“分子体积变得重要 / 分子间力变得重要”。",
            "<b>求出 M 后忘了判断是什么气体</b>：例如 M = 28 g·mol⁻¹ 的双原子气体是 N₂。"],
  defs=[("Ideal gas", "理想气体", "A gas whose particles have no volume and no intermolecular forces, and which obeys the gas laws at all temperatures and pressures.")],
@@ -175,7 +175,7 @@ dict(code="c12", zh="理想气体方程与真实气体", en="Ideal gas equation 
  ans_warm=["2 × 10⁵ Pa；5 × 10⁻⁴ m³", "8 ÷ 32 = 0,25 mol"],
  ans=[("12.1", f"2 × 10⁵ Pa {OK}；5 × 10⁻⁴ m³ {OK}；298 K {OK}"),
       ("12.2", f"n = pV/RT = (101 300)(0,01)/((8,31)(273)) {OK}{OK} = 0,45 mol {OK}"),
-      ("12.3", f"n = (150 000)(0,005)/((8,31)(303)) {OK} = 0,30 mol {OK}；m = nM = 0,298 × 44 {OK} = 13,11 g {OK}"),
+      ("12.3", f"n = (150 000)(0,005)/((8,31)(303)) {OK} = 0,298 mol {OK}；m = nM = 0,298 × 44 {OK} = 13,11 g {OK}"),
       ("12.4", f"高压 {OK}：分子之间距离小，分子本身的体积不能忽略 {OK}；低温 {OK}：分子运动慢，分子间吸引力变得明显 {OK}"),
       ("12.5", f"n = pV/RT = (1 × 10⁵)(2,46 × 10⁻³)/((8,31)(296)) {OK}{OK} = 0,10 mol {OK}；M = 2,8/0,10 = 28 g·mol⁻¹ {OK}；N₂ {OK}"),
       ("12.6", f"H₂ 分子更快 {OK}；同温度下平均动能相同 {OK}，E<sub>k</sub> = ½mv²，H₂ 质量更小所以速度更大 {OK}")]),
@@ -186,15 +186,15 @@ dict(code="c14", zh="能量与化学变化", en="Energy & chemical change",
  warm=[("燃烧木柴是放热还是吸热？", 1), ("冰融化时吸收能量还是放出能量？", 1)],
  learn="""
 <p>化学反应 = <b>断开旧键（吸收能量）</b> + <b>形成新键（放出能量）</b>。</p>
-<p><b>ΔH = 断键吸收的总能量 − 成键放出的总能量</b>。<b>放热 exothermic</b>：ΔH < 0，生成物能量低于反应物；<b>吸热 endothermic</b>：ΔH > 0。</p>
+<p><b>ΔH = 断键吸收的总能量 − 成键放出的总能量</b>。<b>放热 exothermic</b>：ΔH &lt; 0，生成物能量低于反应物；<b>吸热 endothermic</b>：ΔH &gt; 0。</p>
 <p><b>活化能 Ea</b>：反应发生所需的最低能量；曲线顶点是<b>活化络合物 activated complex</b>。逆反应的活化能 = 顶点 − 生成物能量。</p>
 <p><b>催化剂</b>：提供活化能更低的路径，加快反应；<b>不改变 ΔH</b>，反应结束后本身不变。</p>""",
  formulas=[M("ΔH = H<sub>products</sub> − H<sub>reactants</sub>"), M("ΔH = Σ(断键) − Σ(成键)")],
  pitfalls=["<b>断键/成键次数没有乘系数</b>：2CH₃OH 要算 2 个分子里所有的键。",
            "<b>ΔH 漏掉负号或单位</b>：写 −184 kJ·mol⁻¹。",
            "<b>能量图标注不全</b>：坐标轴、反应物、生成物、Ea、ΔH、活化络合物都要标出。"],
- defs=[("Exothermic reaction", "放热反应", "A reaction that releases energy to the surroundings (ΔH < 0)."),
-       ("Endothermic reaction", "吸热反应", "A reaction that absorbs energy from the surroundings (ΔH > 0)."),
+ defs=[("Exothermic reaction", "放热反应", "A reaction that releases energy to the surroundings (ΔH &lt; 0)."),
+       ("Endothermic reaction", "吸热反应", "A reaction that absorbs energy from the surroundings (ΔH &gt; 0)."),
        ("Activation energy", "活化能", "The minimum energy needed for a reaction to take place."),
        ("Activated complex", "活化络合物", "The unstable transition state with the highest potential energy during a reaction."),
        ("Catalyst", "催化剂", "A substance that increases the rate of a reaction but remains unchanged at the end of the reaction.")],
@@ -276,7 +276,7 @@ dict(code="c20", zh="限量试剂、产率与纯度", en="Limiting reagent, perc
 <p><b>产率 % yield</b> = 实际产量 ÷ 理论产量 × 100（理论产量由限量试剂算出）。产率低于 100% 的原因：反应不完全、产物在转移中损失、有副反应。</p>
 <p><b>纯度 % purity</b> = 纯物质的质量 ÷ 不纯样品的质量 × 100。纯物质的质量由产物（如生成的气体）反推得到。</p>""",
  formulas=[M("% yield = " + FR("实际", "理论") + " × 100"), M("% purity = " + FR("m<sub>纯</sub>", "m<sub>样品</sub>") + " × 100")],
- pitfalls=["<b>直接比较两种反应物的 n</b>：要结合系数（2 : 1 时，3 mol 并不一定比 2 mol 多余）。",
+ pitfalls=["<b>直接比较两种反应物的 n</b>：要结合系数。例：N₂ + 3H₂ 中有 1 mol N₂ 和 2 mol H₂，H₂ 虽然更多，却是限量试剂（需要 3 mol）。",
            "<b>用过量试剂计算产物</b>：结果会偏大。",
            "<b>纯度题用了样品的全部质量去算 n</b>：样品中只有一部分会反应。"],
  defs=[("Limiting reagent", "限量试剂", "The reactant that is completely used up in a reaction and therefore limits the amount of product formed."),
@@ -309,7 +309,7 @@ dict(code="c22", zh="有机①：烃与 IUPAC 命名", en="Organic I — hydroca
  defs=[("Homologous series", "同系物", "A series of organic compounds that can be described by the same general formula and in which each member differs from the next by a CH₂ group."),
        ("Saturated compound", "饱和化合物", "A compound in which there are only single bonds between carbon atoms."),
        ("Unsaturated compound", "不饱和化合物", "A compound with one or more multiple bonds (double or triple) between carbon atoms.")],
- ex=[dict(n="22.1", lv=1, q="Classify each as an alkane, alkene or alkyne: C₅H₁₂; C₃H₄; C₆H₁₂.", mk=3, ln=1),
+ ex=[dict(n="22.1", lv=1, q="Each compound is an open-chain hydrocarbon with at most ONE multiple bond. Classify each as an alkane, alkene or alkyne: C₅H₁₂; C₃H₄; C₆H₁₂.", mk=3, ln=1),
      dict(n="22.2", lv=1, q="Write down the IUPAC names: (a) CH₃CH₂CH₂CH₃ (b) CH₂=CHCH₃ (c) HC≡CCH₂CH₃", mk=3, ln=2),
      dict(n="22.3", lv=2, q="Write down the IUPAC names: (a) CH₃CH(CH₃)CH₂CH₃ (b) CH₃C(CH₃)₂CH₃ (c) CH₃CH=CHCH₂CH₃", mk=6, ln=2),
      dict(n="22.4", lv=2, q="Draw the structural formula of 3-ethyl-2-methylhexane.", mk=3, ln=0, box=24),
@@ -330,7 +330,8 @@ dict(code="c24", zh="有机②：官能团与同分异构", en="Organic II — f
 <p><b>结构异构体 structural isomers</b>：分子式相同、结构式不同。</p>
 <ul class="tight"><li><b>链异构</b>：碳链不同，例如 butane 与 2-methylpropane；</li>
 <li><b>位置异构</b>：官能团位置不同，例如 propan-1-ol 与 propan-2-ol；</li>
-<li><b>官能团异构</b>：官能团不同，例如 propanoic acid 与 methyl ethanoate（都是 C₃H₆O₂），propanal 与 propanone。</li></ul>""",
+<li><b>官能团异构</b>：官能团不同，例如 propanoic acid 与 methyl ethanoate（都是 C₃H₆O₂），propanal 与 propanone。</li></ul>
+<p><b>酯化 esterification</b>：羧酸 + 醇 → 酯 + 水（浓硫酸作催化剂）。例：ethanoic acid + ethanol → ethyl ethanoate + H₂O。反推：酯名前半部分来自醇，后半部分来自酸。</p>""",
  formulas=["醇 -ol", "醛 -al", "酮 -one", "羧酸 -oic acid", "酯 alkyl alkanoate", "卤代烷 halo-"],
  pitfalls=["<b>酯的名称前后颠倒</b>：醇的部分在前（-yl），酸的部分在后（-oate）。",
            "<b>醛和酮混淆</b>：C=O 在链端是醛，在链中间是酮。",
@@ -341,11 +342,11 @@ dict(code="c24", zh="有机②：官能团与同分异构", en="Organic II — f
      dict(n="24.2", lv=2, q="Write down the IUPAC names: (a) CH₃CH₂CH₂OH (b) CH₃CH(OH)CH₃ (c) CH₃CH₂COOH (d) CH₃CH₂CHBrCH₃", mk=4, ln=2),
      dict(n="24.3", lv=2, q="(a) Name the ester CH₃CH₂COOCH₃. (2)　(b) Draw the structural formula of ethyl methanoate. (2)", mk=4, ln=1, box=18),
      dict(n="24.4", lv=3, q="Give the structural formulae and IUPAC names of TWO functional isomers with molecular formula C₃H₆O₂.", mk=4, ln=0, box=24),
-     dict(n="24.5", lv=3, q="Write down the IUPAC names of TWO positional isomers with formula C₄H₉Cl that have an unbranched chain.", mk=2, ln=1)],
+     dict(n="24.5", lv=3, q="Name the carboxylic acid and the alcohol that react to form propyl ethanoate.", mk=2, ln=1)],
  ans_warm=["CₙH₂ₙ", "propane"],
  ans=[("24.1", f"(a) 醇 alcohol {OK}　(b) 羧酸 carboxylic acid {OK}　(c) 醛 aldehyde {OK}　(d) 酮 ketone {OK}　(e) 卤代烷 haloalkane {OK}　(f) 酯 ester {OK}"),
       ("24.2", f"(a) propan-1-ol {OK}　(b) propan-2-ol {OK}　(c) propanoic acid {OK}　(d) 2-bromobutane {OK}"),
       ("24.3", f"(a) methyl propanoate {OK}{OK}　(b) H–C(=O)–O–CH₂–CH₃，所有键画出 {OK}{OK}"),
       ("24.4", f"propanoic acid CH₃CH₂COOH {OK}{OK}；methyl ethanoate CH₃COOCH₃（或 ethyl methanoate HCOOCH₂CH₃） {OK}{OK}"),
-      ("24.5", f"1-chlorobutane {OK}；2-chlorobutane {OK}")]),
+      ("24.5", f"ethanoic acid 乙酸 {OK}；propan-1-ol（1-丙醇） {OK}")]),
 ]
