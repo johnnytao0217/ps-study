@@ -4,7 +4,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
-from content_phys import PHYS, M, FR  # noqa: E402
+from content_phys import PHYS, PHYS_EXTRA, M, FR  # noqa: E402
 from content_chem import CHEM  # noqa: E402
 from figs import FIGS, EXFIGS  # noqa: E402
 
@@ -12,7 +12,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "IEB Physical Sciences · Grade 11"
 
 # 物理、化学交替排列
-DAYS = [d for pair in zip(PHYS, CHEM) for d in pair]
+DAYS = [d for pair in zip(PHYS, CHEM) for d in pair] + PHYS_EXTRA
 N = len(DAYS)
 
 
@@ -124,13 +124,15 @@ def index_page():
     rows = ""
     for i, d in enumerate(DAYS):
         no = i + 1
+        if no == len(PHYS) + len(CHEM) + 1:
+            rows += '<tr><td colspan="6" style="background:#ecfdf5"><b>补充：根据近期测验的薄弱点（电磁学、静电推理）</b></td></tr>'
         color = "#0f766e" if subj(d) == "phy" else "#b45309"
         rows += (f'<tr><td><b>Day {no:02d}</b></td><td style="color:{color};font-weight:700">{subj_zh(d)}</td>'
                  f'<td><a href="days/d{no:02d}.html">{d["zh"]}</a><br><span class="note">{d["en"]}</span></td>'
                  f'<td><a href="answers/a{no:02d}.html">答案</a></td><td></td><td></td></tr>')
     body = f"""<section class="sheet flow">
 <div class="hd"><span class="day">Grade 11</span><span class="t">Physical Sciences 每日一练</span><span class="sub">IEB · 物理 P1 + 化学 P2</span></div>
-<p>每天一张 A4（正面讲解、反面练习），双面打印。物理和化学交替，共 {N} 天，覆盖 Grade 11 两张试卷的核心考点。屏幕上的图解可以播放动画。</p>
+<p>每天一张 A4（正面讲解、反面练习），双面打印。Day 01–24 物理和化学交替，覆盖 Grade 11 两张试卷的核心考点；Day 25–27 是针对近期测验薄弱点的物理补充，共 {N} 天。屏幕上的图解可以播放动画。</p>
 <div class="card-links">
 <a href="formulas.html"><b>🧮 公式总表</b><br><span class="note">对照 IEB data sheet，并列出表上没有、必须自己记的公式</span></a>
 <a href="definitions.html"><b>📖 必背定义</b><br><span class="note">定义题每题 2 分，全部汇总，可遮住自测</span></a>
@@ -145,7 +147,7 @@ def index_page():
 </ol>
 <h3 class="sec">进度表</h3>
 <table class="grid"><tr><th style="width:62px">天</th><th style="width:66px">科目</th><th>主题</th><th style="width:44px">答案</th><th style="width:70px">完成日期</th><th style="width:58px">得分</th></tr>{rows}</table>
-<p class="note" style="margin-top:6px">符号与常数按 IEB Grade 11 data sheet：g = 9,8 m·s⁻²；运动方程用 v<sub>i</sub>、v<sub>f</sub>、Δx、Δt。小数点按考卷习惯写作逗号（9,8 = 9.8）。题目均为原创练习题。</p>
+<p class="note" style="margin-top:6px">符号与常数按 IEB Grade 11 data sheet：g = 9,8 m·s⁻²；运动方程按 2026 年测验所附公式表用 u（初速度）、v（末速度），旧写法 u、v 意思相同。小数点按考卷习惯写作逗号（9,8 = 9.8）。题目均为原创练习题。</p>
 <p class="note">后续计划：Grade 11 下半年新主题，以及 Grade 8–10 基础和 Grade 12 内容，将陆续补充。</p>
 </section>"""
     return page("Grade 11 Physical Sciences 每日一练", body, "", "", bar("", [("🧮 公式总表", "formulas.html"), ("📖 必背定义", "definitions.html")]))
@@ -162,7 +164,7 @@ def formulas_page():
                         + "".join(f"<tr><td>{a}</td><td>{M(b)}</td><td>{c}</td></tr>" for a, b, c in rows) + "</table>")
     sheet = lambda rows: ('<table class="grid"><tr><th style="width:110px">主题</th><th>公式</th></tr>'
                           + "".join(f"<tr><td>{a}</td><td>{'　　'.join(M(x) for x in b)}</td></tr>" for a, b in rows) + "</table>")
-    phys_on = [("运动 Motion", ["v<sub>f</sub> = v<sub>i</sub> + aΔt", "Δx = v<sub>i</sub>Δt + ½aΔt²", "v<sub>f</sub>² = v<sub>i</sub>² + 2aΔx", "Δx = ((v<sub>f</sub> + v<sub>i</sub>)/2)Δt"]),
+    phys_on = [("运动 Motion", ["v = u + aΔt", "Δx = uΔt + ½aΔt²", "v² = u² + 2aΔx", "Δx = ((v + u)/2)Δt"]),
                ("力 Force", ["F<sub>net</sub> = ma", "F<sub>g</sub> = mg", "μ<sub>s</sub> = f<sub>s(max)</sub>/N", "μ<sub>k</sub> = f<sub>k</sub>/N"]),
                ("引力与电场", ["F = Gm₁m₂/r²", "g = GM/r²", "F = kQ₁Q₂/r²", "E = F/q", "E = kQ/r²"]),
                ("电路 Circuits", ["I = Q/Δt", "V = W/q", "R = V/I", "emf = I(R + r)", "R<sub>s</sub> = R₁ + R₂", "1/R<sub>p</sub> = 1/R₁ + 1/R₂"]),
@@ -173,6 +175,8 @@ def formulas_page():
                 ("电梯", ["N − mg = ma（向上为正）"]),
                 ("电荷", ["Q = ne", "Q<sub>new</sub> = (Q₁ + Q₂)/2"]),
                 ("内阻", ["V<sub>端</sub> = emf − Ir", "lost volts = Ir"]),
+                ("电磁", ["磁通链 = NΦ", "1 cm² = 10⁻⁴ m²"]),
+                ("比例法", ["F₂ = F₁(r₁/r₂)²", "零场点 kQ₁/x² = kQ₂/(d − x)²"]),
                 ("单位换算", ["km·h⁻¹ ÷ 3,6 = m·s⁻¹", "1 kWh = 3,6 × 10⁶ J"])]
     chem_f = [("摩尔", ["n = m/M", "N = nN<sub>A</sub>", "n = V/V<sub>m</sub>"]), ("溶液", ["c = n/V", "c₁V₁ = c₂V₂"]),
               ("气体", ["p₁V₁/T₁ = p₂V₂/T₂", "pV = nRT", "T(K) = θ(°C) + 273"]), ("能量", ["ΔH = Σ断键 − Σ成键", "ΔH = H<sub>P</sub> − H<sub>R</sub>"]),
@@ -180,7 +184,7 @@ def formulas_page():
     body = f"""<section class="sheet">
 <div class="hd"><span class="day">公式总表</span><span class="t">Physics P1</span><span class="sub">对照学校 Grade 11 data sheet</span></div>
 <h3 class="sec">物理常数 Physical constants</h3>{tbl(phys_const)}
-<h3 class="sec">考试公式表上有的公式</h3>{sheet(phys_on)}
+<h3 class="sec">考试公式表上有的公式</h3>{sheet(phys_on)}<p class="note">运动方程按 2026 年 8 月测验所附公式表写作 u（初速度）、v（末速度）；2022 年卷所附旧表写作 v<sub>i</sub>、v<sub>f</sub>，意思相同。</p>
 <h3 class="sec" style="border-color:#dc2626">⚠ 公式表上没有、必须自己记住的</h3>{sheet(phys_off)}
 <div class="foot"><span>{SITE} · 公式总表</span><span>物理</span></div></section>
 <section class="sheet chem">
@@ -198,7 +202,7 @@ def formulas_page():
 
 def definitions_page():
     out = ""
-    for title, group, cls in (("物理 P1", PHYS, ""), ("化学 P2", CHEM, "chem")):
+    for title, group, cls in (("物理 P1", PHYS + PHYS_EXTRA, ""), ("化学 P2", CHEM, "chem")):
         rows = ""
         seen = set()
         for d in group:

@@ -774,10 +774,89 @@ def c24_ester():
     return svg(p, 250, 70, "".join(s))
 
 
+def p25_faraday():
+    p = "v25"
+    css = (".fig.play .mag{animation:v25m 2.4s ease-in-out .3s 2 alternate both}"
+           "@keyframes v25m{from{transform:translateX(-70px)}to{transform:translateX(0)}}"
+           ".fig.play .ndl{transform-box:view-box;transform-origin:250px 170px;animation:v25n 2.4s ease-in-out .3s 2 alternate both}"
+           "@keyframes v25n{0%{transform:rotate(0)}50%{transform:rotate(28deg)}100%{transform:rotate(0)}}")
+    coil = "".join(f'<ellipse cx="{150 + k * 12}" cy="80" rx="6" ry="26" fill="none" stroke="#b45309" stroke-width="2.4"/>' for k in range(8))
+    s = [coil,
+         '<path d="M150 106 V170 H230 M270 170 H330 V106 H234" fill="none" stroke="#1f2937" stroke-width="2"/>',
+         '<circle cx="250" cy="170" r="20" fill="#fff" stroke="#1f2937" stroke-width="2"/>', text(250, 202, "电流计 G", anchor="middle", size=11),
+         '<line class="ndl" x1="250" y1="170" x2="250" y2="154" stroke="#dc2626" stroke-width="2.4"/>',
+         '<g class="mag"><rect x="40" y="66" width="44" height="28" fill="#dc2626"/><rect x="84" y="66" width="44" height="28" fill="#2563eb"/>'
+         + text(62, 85, "S", anchor="middle", c="#ffffff", weight=700) + text(106, 85, "N", anchor="middle", c="#ffffff", weight=700) + "</g>",
+         text(30, 20, "磁铁进/出 → 磁通变化 → 感应电流", size=11.5, weight=700),
+         text(30, 38, "磁铁不动 → 磁通不变 → 指针不动", size=11, c="s")]
+    ox, oy = 450, 110
+    s += [text(390, 20, "Φ = BA cosθ 中的 θ", size=11.5, weight=700),
+          '<line x1="420" y1="60" x2="480" y2="160" stroke="#1f2937" stroke-width="5"/>',
+          text(486, 170, "线圈平面", size=10.5),
+          arrow(p, 450, 110, 450 + 70 * 0.866, 110 - 70 * 0.5, "g", 2.2),
+          text(512, 70, "法线 normal", size=10.5, c="g"),
+          arrow(p, 380, 110, 540, 110, "b", 2.2), text(380, 102, "磁场 B", size=10.5, c="b"),
+          path("M480 110 A30 30 0 0 0 476 95", "r", 1.6), text(486, 104, "θ", c="r", cls="m"),
+          text(370, 196, "平面⊥B：θ = 0°，Φ 最大", size=11), text(370, 212, "平面∥B：θ = 90°，Φ = 0", size=11)]
+    return fig(svg(p, 580, 220, "".join(s)), "左：法拉第电磁感应（动画中磁铁进出，指针来回偏）；右：θ 是 B 与线圈平面法线的夹角", style=css)
+
+
+def p26_lenz():
+    p = "v26"
+    css = (".fig.play .mg{animation:v26m 2s ease-out .2s both}@keyframes v26m{from{transform:translateX(-60px)}to{transform:translateX(0)}}")
+    coil = "".join(f'<ellipse cx="{170 + k * 11}" cy="70" rx="6" ry="28" fill="none" stroke="#b45309" stroke-width="2.4"/>' for k in range(7))
+    s = [text(20, 20, "① 来拒：N 靠近 → 左端感应出 N 极，排斥", size=11.5, weight=700),
+         '<g class="mg"><rect x="40" y="56" width="44" height="28" fill="#dc2626"/><rect x="84" y="56" width="44" height="28" fill="#2563eb"/>'
+         + text(62, 75, "S", anchor="middle", c="#ffffff", weight=700) + text(106, 75, "N", anchor="middle", c="#ffffff", weight=700) + "</g>",
+         arrow(p, 100, 104, 140, 104, "k", 2), text(100, 120, "靠近", size=10.5),
+         coil, text(158, 75, "N", anchor="end", weight=700, c="b", size=14),
+         arrow(p, 156, 44, 136, 44, "r", 2.4), text(146, 38, "排斥", size=10.5, c="r", anchor="middle"),
+         text(20, 150, "② 去留：N 离开 → 左端变成 S 极，吸引", size=11.5, weight=700),
+         text(20, 168, "感应电流总是“反对”磁通的变化（楞次定律）", size=11, c="s")]
+    # transformer
+    s += ['<rect x="330" y="40" width="200" height="120" rx="6" fill="none" stroke="#6b7280" stroke-width="14"/>',
+          "".join(f'<line x1="318" y1="{60 + k * 12}" x2="342" y2="{66 + k * 12}" stroke="#b45309" stroke-width="2.4"/>' for k in range(7)),
+          "".join(f'<line x1="518" y1="{54 + k * 9}" x2="542" y2="{60 + k * 9}" stroke="#2563eb" stroke-width="2.4"/>' for k in range(10)),
+          text(330, 30, "原线圈 Nₚ（接 AC）", size=11, c="#b45309", anchor="middle"),
+          text(530, 30, "副线圈 Nₛ", size=11, c="b", anchor="middle"),
+          text(430, 104, "铁芯中磁通", size=11, anchor="middle"), text(430, 120, "不断变化", size=11, anchor="middle"),
+          text(330, 190, "Vₛ/Vₚ = Nₛ/Nₚ；只能用交流 AC", size=11.5, weight=700),
+          text(330, 208, "Nₛ > Nₚ 升压；Nₛ < Nₚ 降压", size=11)]
+    return fig(svg(p, 580, 216, "".join(s).replace(" > ", " &gt; ").replace(" < ", " &lt; ")),
+               "左：楞次定律“来拒去留”；右：变压器（磁通变化才能在副线圈感应出电压）", style=css)
+
+
+def p27_zero():
+    p = "v27"
+    A, B = 60, 300  # +Q at 60, +9Q at 300 (12 cm → 240 px)
+    P = A + 60      # 3 cm
+    s = [f'<line x1="30" y1="70" x2="330" y2="70" stroke="#9ca3af" stroke-dasharray="4 3"/>',
+         f'<circle cx="{A}" cy="70" r="12" fill="#fecaca" stroke="#1f2937"/>', text(A, 75, "+Q", anchor="middle", size=10.5, weight=700),
+         f'<circle cx="{B}" cy="70" r="20" fill="#fecaca" stroke="#1f2937"/>', text(B, 75, "+9Q", anchor="middle", size=11, weight=700),
+         f'<circle cx="{P}" cy="70" r="4" fill="#7c3aed"/>', text(P, 58, "P：E = 0", anchor="middle", c="p", weight=700, size=11),
+         arrow(p, P, 92, P + 50, 92, "r", 2.4, d=0.4), text(P + 54, 96, "E 来自 +Q（向右）", size=10.5, c="r", d=0.4),
+         arrow(p, P, 108, P - 50, 108, "b", 2.4, d=0.9), text(P - 54, 126, "E 来自 +9Q（向左）", size=10.5, c="b", d=0.9),
+         text(A, 150, "x = 3 cm", size=11, d=1.4), text(A + 120, 150, "12 − x = 9 cm", size=11, d=1.4),
+         text(20, 178, "kQ/3² = k(9Q)/9² ✓ 两个场大小相等、方向相反", size=11.3, weight=700, d=1.8),
+         text(20, 198, "零场点在两个同号电荷之间，靠近小电荷", size=11.3, c="s", d=1.8)]
+    ox, oy, W, H = 380, 170, 170, 140
+    s += [f'<line x1="{ox}" y1="{oy}" x2="{ox + W}" y2="{oy}" stroke="#1f2937" stroke-width="1.5"/>',
+          f'<line x1="{ox}" y1="{oy}" x2="{ox}" y2="{oy - H}" stroke="#1f2937" stroke-width="1.5"/>',
+          text(ox + W, oy + 16, "r", size=11, anchor="end", cls="m"), text(ox + 4, oy - H - 4, "E", size=11, cls="m")]
+    for q, col, lab in ((2, "#2563eb", "+2 nC"), (4, "#dc2626", "+4 nC")):
+        pts = " ".join(f"{ox + x:.1f},{oy - min(H - 6, q * 18720 / (x + 10) ** 2):.1f}" for x in range(14, W, 3))
+        s.append(f'<polyline points="{pts}" fill="none" stroke="{col}" stroke-width="2.4"/>')
+        lx = 24 if q == 4 else 44
+        s.append(text(ox + lx + 6, oy - q * 18720 / (lx + 10) ** 2 - 4, lab, size=11, c=col, weight=700))
+    s.append(text(ox, oy + 34, "电荷越大，同一距离 E 越大", size=11, c="s"))
+    return fig(svg(p, 580, 210, "".join(s)), "左：两个同号电荷之间的零场点；右：E 随距离的变化（反平方）")
+
+
 FIGS = {
     "p01": p01_vectors, "p03": p03_distance, "p05": p05_chase, "p07": p07_graphs, "p09": p09_fbd, "p11": p11_incline,
     "p13": p13_connected, "p15": p15_gravity, "p17": p17_contact, "p19": p19_field, "p21": p21_series_parallel, "p23": p23_emf,
     "c02": c02_dative, "c04": c04_vsepr, "c06": c06_imf, "c08": c08_bp, "c10": c10_kmt, "c12": c12_real, "c14": c14_profile,
     "c16": c16_molemap, "c18": c18_flow, "c20": c20_sandwich, "c22": c22_naming, "c24": c24_groups,
+    "p25": p25_faraday, "p26": p26_lenz, "p27": p27_zero,
 }
 EXFIGS = {"ex07": ex07_vt, "ex21": ex21_circuit}

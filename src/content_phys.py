@@ -43,7 +43,7 @@ dict(code="p03", zh="运动学①：位移、速度、加速度", en="Kinematics
 <p><b>平均速率</b> = 总路程 ÷ 总时间；<b>平均速度</b> = 位移 ÷ 时间（带方向）。绕操场跑一圈回到起点：速率不为 0，速度 = 0。</p>
 <p><b>加速度 acceleration</b> = 速度的变化率。先规定一个<b>正方向</b>：a 与 v 同号 → 加速；a 与 v 异号 → 减速。负号表示方向，不表示“更小”。</p>
 <p><b>km·h⁻¹ ÷ 3,6 = m·s⁻¹</b>。计算前统一成 SI 单位：m、s、m·s⁻¹。</p>""",
- formulas=[M("v<sub>ave</sub> = " + FR("Δx", "Δt")), M("平均速率 = " + FR("总路程", "总时间")), M("a = " + FR("Δv", "Δt") + " = " + FR("v<sub>f</sub> − v<sub>i</sub>", "Δt"))],
+ formulas=[M("v<sub>ave</sub> = " + FR("Δx", "Δt")), M("平均速率 = " + FR("总路程", "总时间")), M("a = " + FR("Δv", "Δt") + " = " + FR("v − u", "Δt"))],
  pitfalls=["<b>平均速率 ≠ 速率的平均值</b>：前后两段速度不同、时间不同，必须用 总路程 ÷ 总时间。",
            "<b>忘记换单位</b>：km·h⁻¹ 与 m·s⁻¹ 混用，答案差 3,6 倍。",
            "<b>减速时 a 的方向写错</b>：向北减速 → 加速度向南。"],
@@ -59,7 +59,7 @@ dict(code="p03", zh="运动学①：位移、速度、加速度", en="Kinematics
  ans_warm=["72 ÷ 3,6 = 20 m·s⁻¹", "2,5 × 60 = 150 s"],
  ans=[("3.1", f"平均速率 = 400/80 {OK} = 5 m·s⁻¹ {OK}；位移 = 0，所以平均速度 = 0 {OK}"),
       ("3.2", f"a = (25 − 10)/5 {OK}{OK} = 3 m·s⁻² east {OK}"),
-      ("3.3", f"v<sub>i</sub> = 25 m·s⁻¹，v<sub>f</sub> = 15 m·s⁻¹ {OK}；a = (15 − 25)/4 {OK} = −2,5 m·s⁻² {OK} → 2,5 m·s⁻² south {OK}"),
+      ("3.3", f"u = 25 m·s⁻¹，v = 15 m·s⁻¹ {OK}；a = (15 − 25)/4 {OK} = −2,5 m·s⁻² {OK} → 2,5 m·s⁻² south {OK}"),
       ("3.4", f"Δt₁ = 12/60 = 0,2 h {OK}；Δt₂ = 12/120 = 0,1 h {OK}；平均速率 = 24/0,3 {OK} = 80 km·h⁻¹ {OK}（不是 90！）"),
       ("3.5", f"(a) 总路程 7 000 m {OK}，总时间 1 500 s {OK}，速率 = 4,67 m·s⁻¹ {OK}<br>"
               f"(b) Δx = √(3² + 4²) = 5 km {OK}；tan θ = 4/3 → θ = 53,13° E of N（方位角 053,13°） {OK}{OK}<br>"
@@ -71,12 +71,12 @@ dict(code="p05", zh="运动学②：四个运动方程", en="Kinematics II — e
  warm=[("解方程：2x + 5 = 17。", 1), ("把 a = Δv/Δt 变形，写出 Δt 的表达式。", 1)],
  learn="""
 <p>四个运动方程<b>只适用于匀加速直线运动</b>（a 不变）。每个方程缺一个量，按“缺什么”选方程。</p>
-<p><b>解题四步：</b>① 规定正方向；② 列出已知量 v<sub>i</sub>、v<sub>f</sub>、a、Δx、Δt（“从静止出发”= v<sub>i</sub> = 0，“停下”= v<sub>f</sub> = 0）；③ 选不含无关量的方程；④ 写出公式 → 代入 → 带单位的答案。</p>
+<p><b>符号</b>：u = 初速度，v = 末速度（旧教材写作 u、v，意思相同）。<b>解题四步：</b>① 规定正方向；② 列出已知量 u、v、a、Δx、Δt（“从静止出发”= u = 0，“停下”= v = 0）；③ 选不含无关量的方程；④ 写出公式 → 代入 → 带单位的答案。</p>
 <p><b>追及问题</b>：两车从同一点出发，追上时<b>位移相等</b>。若一辆晚出发 3 s，它的时间是 t，另一辆是 (t + 3)。</p>
 <p><b>反应时间</b>内车仍以原速匀速前进，刹车距离要加上这一段。</p>""",
- formulas=[M("v<sub>f</sub> = v<sub>i</sub> + aΔt"), M("Δx = v<sub>i</sub>Δt + ½aΔt²"), M("v<sub>f</sub>² = v<sub>i</sub>² + 2aΔx"), M("Δx = (" + FR("v<sub>f</sub> + v<sub>i</sub>", "2") + ")Δt")],
+ formulas=[M("v = u + aΔt"), M("Δx = uΔt + ½aΔt²"), M("v² = u² + 2aΔx"), M("Δx = (" + FR("v + u", "2") + ")Δt")],
  pitfalls=["<b>正负号不一致</b>：取向前为正，减速时 a 代入负值。",
-           "<b>用了课本外的 u、v、s 符号</b>：IEB 公式表用 v<sub>i</sub>、v<sub>f</sub>、Δx、Δt，考试请照用。",
+           "<b>u 和 v 搞反</b>：u 是初速度（开始时），v 是末速度（结束时）。考试发的公式表用 u、v，旧教材的 u、v 是同一个意思。",
            "<b>追及题忘了时间差</b>：晚出发的物体用时更短。"],
  defs=[("Uniform acceleration", "匀加速", "Acceleration that remains constant in magnitude and direction.")],
  ex=[dict(n="5.1", lv=1, q="A car starts from rest and accelerates uniformly at 3 m·s⁻² for 6 s. Calculate its final velocity and its displacement.", mk=4, ln=3),
@@ -85,9 +85,9 @@ dict(code="p05", zh="运动学②：四个运动方程", en="Kinematics II — e
      dict(n="5.4", lv=2, q="A driver travelling at 20 m·s⁻¹ sees a hazard. Her reaction time is 0,5 s, after which she brakes with a deceleration of 5 m·s⁻². Calculate the total stopping distance.", mk=5, ln=3),
      dict(n="5.5", lv=3, q="A speeding car passes a stationary police car at a constant 20 m·s⁻¹. The police car starts 3 s later, accelerating uniformly at 4 m·s⁻². How long after the police car starts does it catch the speeding car, and how far from the starting point?", mk=6, ln=5)],
  ans_warm=["x = 6", "Δt = Δv / a"],
- ans=[("5.1", f"v<sub>f</sub> = 0 + 3(6) {OK} = 18 m·s⁻¹ {OK}；Δx = 0 + ½(3)(6)² {OK} = 54 m {OK}"),
-      ("5.2", f"v<sub>f</sub>² = v<sub>i</sub>² + 2aΔx：0 = 30² + 2a(75) {OK}{OK} → a = −6 m·s⁻²，大小 6 m·s⁻² {OK}"),
-      ("5.3", f"Δx = ((v<sub>f</sub> + v<sub>i</sub>)/2)Δt：42 = (14/2)Δt {OK}{OK} → Δt = 6 s {OK}"),
+ ans=[("5.1", f"v = 0 + 3(6) {OK} = 18 m·s⁻¹ {OK}；Δx = 0 + ½(3)(6)² {OK} = 54 m {OK}"),
+      ("5.2", f"v² = u² + 2aΔx：0 = 30² + 2a(75) {OK}{OK} → a = −6 m·s⁻²，大小 6 m·s⁻² {OK}"),
+      ("5.3", f"Δx = ((v + u)/2)Δt：42 = (14/2)Δt {OK}{OK} → Δt = 6 s {OK}"),
       ("5.4", f"反应距离 = 20 × 0,5 = 10 m {OK}{OK}；刹车：0 = 20² + 2(−5)Δx {OK} → Δx = 40 m {OK}；总距离 50 m {OK}"),
       ("5.5", f"设警车用时 t：警车 Δx = ½(4)t² = 2t² {OK}；超速车 Δx = 20(t + 3) {OK}；令相等：2t² = 20t + 60 {OK} → t² − 10t − 30 = 0 {OK}<br>"
               f"t = (10 + √220)/2 = 12,42 s {OK}；距离 = 2(12,42)² ≈ 308,32 m {OK}")]),
@@ -350,4 +350,95 @@ dict(code="p23", zh="电路②：电动势、内阻、功率与电费", en="Elec
       ("23.3", f"(a) 12 = I(5,5 + 0,5) {OK} → I = 2 A {OK}　(b) V = 2 × 5,5 {OK} = 11 V {OK}　(c) P = I²R = 2² × 5,5 {OK} = 22 W {OK}"),
       ("23.4", f"W = 2 kW × 0,25 h × 30 {OK}{OK} = 15 kWh {OK}；费用 = 15 × 3,20 = R48,00 {OK}"),
       ("23.5", f"V = ε − Ir：5,4 = ε − 0,4r，4,2 = ε − 1,2r {OK}{OK}；相减：1,2 = 0,8r → r = 1,5 Ω {OK}；ε = 5,4 + 0,4(1,5) {OK} = 6,0 V {OK}")]),
+]
+
+# 根据近期测验（2026 年 8 月 Cycle Test、随堂测验）暴露的弱项补充的物理日
+PHYS_EXTRA = [
+# ------------------------------------------------------------------ P25
+dict(code="p25", zh="电磁感应①：磁通量与法拉第定律", en="Electromagnetism I — magnetic flux & Faraday's law",
+ bridge="Grade 9：磁铁与磁场；Day 15 科学记数法",
+ warm=[("800 cm² 等于多少 m²？", 1), ("cos 0°、cos 90° 分别等于多少？", 1)],
+ learn="""
+<p><b>电流产生磁场</b>：通电直导线周围的磁场是一圈圈同心圆。<b>右手定则</b>：大拇指指电流方向，四指弯曲的方向就是磁场方向。⊙ 表示电流流出纸面（磁场逆时针），⊗ 表示流入纸面（磁场顺时针）。螺线管：四指顺着电流绕，大拇指指向 N 极。</p>
+<p><b>磁通量 Φ = BA cosθ</b>（单位 Wb），θ 是磁场 B 与线圈平面<b>法线 normal</b> 之间的夹角：线圈平面与磁场垂直时 θ = 0°，Φ 最大；平面与磁场平行时 Φ = 0。<b>磁通链 flux linkage = NΦ</b>（N 为匝数）。</p>
+<p><b>法拉第定律</b>：穿过线圈的磁通发生<b>变化</b>时产生感应电动势，emf = −NΔΦ/Δt，其中 ΔΦ = Φ<sub>末</sub> − Φ<sub>初</sub>。<b>增大 emf 的方法</b>：增加匝数 N；更快地改变（Δt 更小）；用更强的磁场；增大线圈面积。</p>""",
+ formulas=[M("Φ = BA cos θ"), "磁通链 " + M("NΦ"), M("emf = −N" + FR("ΔΦ", "Δt")), M("1 cm² = 10⁻⁴ m²")],
+ pitfalls=["<b>cm² 换算成 m² 写成 ×10⁻²</b>：面积要 ×10⁻⁴，例如 800 cm² = 0,08 m²。",
+           "<b>问“磁通链”却只算了 Φ</b>：磁通链 = NΦ，要乘匝数。",
+           "<b>数量级算错</b>：算完 emf 检查 10 的幂次；θ 是磁场与线圈<b>法线</b>的夹角，不是与平面的夹角。"],
+ defs=[("Magnetic field", "磁场", "A region in space where a magnet or a ferromagnetic material experiences a (non-contact) force."),
+       ("Magnetic flux", "磁通量", "The product of the component of the magnetic field perpendicular to a surface and the area of that surface (Φ = BA cos θ)."),
+       ("Faraday’s Law of electromagnetic induction", "法拉第电磁感应定律", "The magnitude of the induced emf across the ends of a conductor is directly proportional to the rate of change in the magnetic flux linkage with the conductor.")],
+ ex=[dict(n="25.1", lv=1, q="Draw the magnetic field pattern around a straight conductor carrying current INTO the page (⊗). Show the direction.", mk=2, ln=0, box=18),
+     dict(n="25.2", lv=2, q="A rectangular coil of 200 turns measures 0,2 m × 0,3 m. Its plane is perpendicular to a uniform magnetic field. The field increases uniformly from 0,4 T to 1,2 T in 0,5 s. Calculate (a) the area of the coil (1); (b) the change in magnetic flux (3); (c) the magnitude of the induced emf (3).", mk=7, ln=5),
+     dict(n="25.3", lv=2, q="A coil of 150 turns and area 40 cm² is held with its axis parallel to a magnetic field of 0,5 T. Calculate the magnetic flux linkage.", mk=3, ln=2),
+     dict(n="25.4", lv=2, q="State THREE ways to increase the magnitude of the emf induced in a coil.", mk=3, ln=2),
+     dict(n="25.5", lv=3, q="A coil of 100 turns and area 0,02 m² is in a field of 0,8 T with its plane perpendicular to the field. It is rotated through 90° in 0,1 s so that its plane becomes parallel to the field. Calculate the average induced emf.", mk=5, ln=4)],
+ ans_warm=["800 × 10⁻⁴ = 0,08 m²", "cos 0° = 1；cos 90° = 0"],
+ ans=[("25.1", f"以导线为圆心的同心圆 {OK}；方向顺时针 {OK}"),
+      ("25.2", f"(a) A = 0,2 × 0,3 = 0,06 m² {OK}<br>(b) ΔΦ = ΔB·A cos0° {OK} = (1,2 − 0,4)(0,06)(1) {OK} = 0,048 Wb {OK}<br>"
+               f"(c) emf = NΔΦ/Δt = 200 × 0,048 / 0,5 {OK}{OK} = 19,2 V {OK}"),
+      ("25.3", f"A = 40 × 10⁻⁴ = 4 × 10⁻³ m² {OK}；Φ = 0,5 × 4 × 10⁻³ × cos0° = 2 × 10⁻³ Wb {OK}；NΦ = 150 × 2 × 10⁻³ = 0,30 Wb {OK}"),
+      ("25.4", f"增加匝数 {OK}；更快地移动磁铁或线圈（缩短 Δt） {OK}；使用更强的磁场或更大的线圈面积 {OK}"),
+      ("25.5", f"Φ<sub>初</sub> = 0,8 × 0,02 × cos0° = 0,016 Wb {OK}；Φ<sub>末</sub> = 0（cos90° = 0） {OK}；ΔΦ = −0,016 Wb {OK}；"
+               f"emf = −100 × (−0,016)/0,1 {OK} = 16 V {OK}")]),
+
+# ------------------------------------------------------------------ P26
+dict(code="p26", zh="电磁感应②：楞次定律、变压器、高压输电", en="Electromagnetism II — Lenz's law, transformers, power transmission",
+ bridge="Day 23 的 P = VI 和 P = I²R",
+ warm=[("1 000 W 的电器接 250 V，电流是多少？", 1), ("电流 4 A 通过 2 Ω 的导线，发热功率 I²R 是多少？", 1)],
+ learn="""
+<p><b>楞次定律 Lenz's law</b>：感应电流的方向，总是使它产生的磁场<b>反对引起它的磁通变化</b>。口诀“来拒去留”：磁铁 N 极靠近线圈 → 线圈这一端变成 N 极（排斥）；N 极离开 → 这一端变成 S 极（吸引）。</p>
+<p><b>变压器只能用交流 AC</b>：原线圈中的交流电使铁芯里的磁通<b>不断变化</b> → 副线圈产生感应 emf。稳定的直流 DC 只在接通瞬间有变化，之后磁通不变 → 没有感应电流。理想变压器：V<sub>s</sub>/V<sub>p</sub> = N<sub>s</sub>/N<sub>p</sub>；N<sub>s</sub> &gt; N<sub>p</sub> 为升压，反之为降压。</p>
+<p><b>为什么 Eskom 用高压输电</b>：输送功率 P = VI 一定时，电压升高 → <b>电流减小</b> → 输电线上的热损耗 P<sub>损</sub> = I²R 大大减小。到用户附近再用降压变压器降压。</p>
+<p class="warm"><b>解释题四步模板</b>：① 什么在变化（磁通？）→ ② 法拉第：产生感应 emf / 电流 → ③ 楞次：感应磁场方向反对这个变化 → ④ 结果（排斥、吸引、环跳起……）。每一步一句话，写完再停。</p>""",
+ formulas=[M(FR("V<sub>s</sub>", "V<sub>p</sub>") + " = " + FR("N<sub>s</sub>", "N<sub>p</sub>")), M("V<sub>p</sub>I<sub>p</sub> = V<sub>s</sub>I<sub>s</sub>"), M("P<sub>损</sub> = I²R")],
+ pitfalls=["<b>高压输电写成“为了减少电压损失”</b>：得 0 分。要写：电压升高 → 电流减小 → I²R 热损耗减小。",
+           "<b>楞次定律只写“方向相反”</b>：要写“反对<b>磁通的变化</b>”，不是反对磁场本身。",
+           "<b>解释题写成一大段</b>：按四步模板，每步一句，关键词必须出现（磁通变化、感应电流、反对、排斥）。"],
+ defs=[("Lenz’s Law", "楞次定律", "The induced current flows in a direction so as to set up a magnetic field that opposes the change in magnetic flux that produced it."),
+       ("Step-up transformer", "升压变压器", "A transformer with more turns on the secondary coil than on the primary coil, so that the secondary voltage is greater than the primary voltage.")],
+ ex=[dict(n="26.1", lv=1, q="State Lenz’s law in words.", mk=2, ln=2),
+     dict(n="26.2", lv=1, q="An ideal transformer has 200 turns on the primary and 50 turns on the secondary coil. The primary is connected to 240 V AC. Calculate the secondary voltage and state whether it is a step-up or step-down transformer.", mk=3, ln=2),
+     dict(n="26.3", lv=2, q="The north pole of a bar magnet is pulled AWAY from end X of a solenoid. Which magnetic pole forms at X? Explain using Lenz’s law.", mk=3, ln=3),
+     dict(n="26.4", lv=2, q="A power station sends 50 kW through cables with a total resistance of 4 Ω. Calculate the power lost in the cables when the power is transmitted at (a) 1 000 V and (b) 10 000 V. (c) What does this show?", mk=5, ln=3),
+     dict(n="26.5", lv=2, q="For an ideal transformer, V<sub>p</sub> = 240 V, I<sub>p</sub> = 0,5 A and V<sub>s</sub> = 12 V. Calculate I<sub>s</sub>.", mk=3, ln=2),
+     dict(n="26.6", lv=3, q="Explain why a transformer does not work with a steady DC supply. Use the four-step template.", mk=3, ln=3)],
+ ans_warm=["I = P/V = 1 000/250 = 4 A", "P = 4² × 2 = 32 W"],
+ ans=[("26.1", f"感应电流的方向使它产生的磁场 {OK} 反对引起它的磁通变化 {OK}"),
+      ("26.2", f"V<sub>s</sub>/240 = 50/200 {OK} → V<sub>s</sub> = 60 V {OK}；降压变压器 step-down {OK}"),
+      ("26.3", f"S 极 {OK}；N 极离开使穿过线圈的磁通减小 {OK}；感应电流的磁场反对这种减小，在 X 端形成 S 极吸引磁铁（反对它离开） {OK}"),
+      ("26.4", f"(a) I = 50 000/1 000 = 50 A {OK}；P<sub>损</sub> = 50² × 4 = 10 000 W {OK}　(b) I = 5 A {OK}；P<sub>损</sub> = 5² × 4 = 100 W {OK}<br>"
+               f"(c) 电压提高 10 倍，电流减小 10 倍，损耗减小 100 倍，所以要用高压输电 {OK}"),
+      ("26.5", f"V<sub>p</sub>I<sub>p</sub> = V<sub>s</sub>I<sub>s</sub> {OK}；240 × 0,5 = 12 I<sub>s</sub> {OK} → I<sub>s</sub> = 10 A {OK}"),
+      ("26.6", f"稳定的直流在铁芯中产生不变的磁场，磁通不变 {OK}；没有磁通变化就没有感应 emf（法拉第定律） {OK}；所以副线圈中没有感应电流和输出电压 {OK}")]),
+
+# ------------------------------------------------------------------ P27
+dict(code="p27", zh="静电专练：比例推理、零场点、电子转移", en="Electrostatics practice — ratios, zero-field points, electron transfer",
+ bridge="Day 17、Day 19 的库仑定律与电场",
+ warm=[("距离变为原来的 1/2，F ∝ 1/r² 中的力变为原来的几倍？", 1), ("计算 (30/20)²。", 1)],
+ learn="""
+<p><b>比例法（不用 k 计算）</b>：F ∝ 1/r²，所以 F₂ = F₁ × (r₁/r₂)²。例：r 从 30 mm 变成 20 mm，F × (30/20)² = F × 2,25。表格题里“不用计算求缺失值”就用这个方法。</p>
+<p><b>图像</b>：F 对 1/r² 作图是<b>过原点的直线</b>；F 对 r 或 r² 作图是下降的曲线。同一个电荷 q 放在不同电场中，F = qE，所以 F 对 E 是<b>过原点的直线</b>。E 对距离作图：电荷越大，同一距离处 E 越大，曲线越高。</p>
+<p><b>零场点 E = 0</b>：两个<b>同号</b>电荷之间有一点合电场为零，位置<b>靠近较小的电荷</b>；令 kQ₁/x² = kQ₂/(d − x)² 求 x。两个异号电荷之间不可能为零。</p>
+<p><b>电子转移数</b>：先求<b>其中一个球</b>的电荷变化量 ΔQ = Q<sub>末</sub> − Q<sub>初</sub>，再 n = |ΔQ|/e。ΔQ 为正说明这个球失去了电子。</p>""",
+ formulas=[M("F₂ = F₁ (" + FR("r₁", "r₂") + ")²"), M("F = qE"), "零场点：" + M(FR("kQ₁", "x²") + " = " + FR("kQ₂", "(d − x)²")), M("n = " + FR("|ΔQ|", "e"))],
+ pitfalls=["<b>表格缺失值题直接套 kQ₁Q₂/r²</b>：不知道电荷时，用比例 F₂ = F₁(r₁/r₂)²。",
+           "<b>零场点找在大电荷附近</b>：应在<b>小电荷</b>一侧。",
+           "<b>电子转移数用两个球的电荷差</b>：要用<b>一个球</b>前后电荷的变化。"],
+ defs=[("Coulomb’s Law", "库仑定律", "The magnitude of the electrostatic force exerted by one point charge on another is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance between them."),
+       ("Electric field at a point", "某点的电场强度", "The electrostatic force experienced per unit positive charge placed at that point.")],
+ ex=[dict(n="27.1", lv=1, q="Two charges exert a force of 40 N on each other when 30 mm apart. Without using k, determine the force when they are (a) 20 mm apart and (b) 60 mm apart.", mk=4, ln=3),
+     dict(n="27.2", lv=1, q="Which graph gives a straight line through the origin: F vs r, F vs r², or F vs 1/r²?", mk=1, ln=1),
+     dict(n="27.3", lv=2, q="Point charges +Q and +9Q are 12 cm apart. Calculate how far from +Q the net electric field is zero.", mk=4, ln=3),
+     dict(n="27.4", lv=2, q="Identical spheres A (−6 pC) and B (−2 pC) touch and are separated. Calculate the number of electrons transferred and state the direction of transfer.", mk=4, ln=3),
+     dict(n="27.5", lv=3, q="On the same set of axes, sketch graphs of electric field strength E against distance for a +2 nC and a +4 nC point charge. Label the graphs.", mk=3, ln=0, box=24),
+     dict(n="27.6", lv=3, q="The same charge q is placed in electric fields of different strength. Sketch the graph of force F against field strength E, and state what the gradient represents.", mk=2, ln=0, box=18)],
+ ans_warm=["4 倍", "2,25"],
+ ans=[("27.1", f"(a) F = 40 × (30/20)² {OK} = 90 N {OK}　(b) F = 40 × (30/60)² {OK} = 10 N {OK}"),
+      ("27.2", f"F vs 1/r² {OK}"),
+      ("27.3", f"kQ/x² = k(9Q)/(12 − x)² {OK}{OK}；(12 − x)/x = 3 {OK} → x = 3 cm（距 +Q） {OK}"),
+      ("27.4", f"Q<sub>末</sub> = (−6 − 2)/2 = −4 pC {OK}；A：ΔQ = −4 − (−6) = +2 pC，A 失去电子 {OK}；n = 2 × 10⁻¹²/1,6 × 10⁻¹⁹ = 1,25 × 10⁷ 个 {OK}；从 A 转移到 B {OK}"),
+      ("27.5", f"两条都是随距离迅速下降的曲线（反平方） {OK}；+4 nC 的曲线在每个距离处都更高 {OK}；曲线不与坐标轴相交，标出两条曲线 {OK}"),
+      ("27.6", f"过原点的直线 {OK}；斜率 = q（电荷量） {OK}")]),
 ]
