@@ -71,12 +71,12 @@ dict(code="p05", zh="运动学②：四个运动方程", en="Kinematics II — e
  warm=[("解方程：2x + 5 = 17。", 1), ("把 a = Δv/Δt 变形，写出 Δt 的表达式。", 1)],
  learn="""
 <p>四个运动方程<b>只适用于匀加速直线运动</b>（a 不变）。每个方程缺一个量，按“缺什么”选方程。</p>
-<p><b>符号</b>：u = 初速度，v = 末速度（旧教材写作 u、v，意思相同）。<b>解题四步：</b>① 规定正方向；② 列出已知量 u、v、a、Δx、Δt（“从静止出发”= u = 0，“停下”= v = 0）；③ 选不含无关量的方程；④ 写出公式 → 代入 → 带单位的答案。</p>
+<p><b>符号</b>：u = 初速度，v = 末速度（旧教材写作 v<sub>i</sub>、v<sub>f</sub>，意思相同）。<b>解题四步：</b>① 规定正方向；② 列出已知量 u、v、a、Δx、Δt（“从静止出发”= u = 0，“停下”= v = 0）；③ 选不含无关量的方程；④ 写出公式 → 代入 → 带单位的答案。</p>
 <p><b>追及问题</b>：两车从同一点出发，追上时<b>位移相等</b>。若一辆晚出发 3 s，它的时间是 t，另一辆是 (t + 3)。</p>
 <p><b>反应时间</b>内车仍以原速匀速前进，刹车距离要加上这一段。</p>""",
  formulas=[M("v = u + aΔt"), M("Δx = uΔt + ½aΔt²"), M("v² = u² + 2aΔx"), M("Δx = (" + FR("v + u", "2") + ")Δt")],
  pitfalls=["<b>正负号不一致</b>：取向前为正，减速时 a 代入负值。",
-           "<b>u 和 v 搞反</b>：u 是初速度（开始时），v 是末速度（结束时）。考试发的公式表用 u、v，旧教材的 u、v 是同一个意思。",
+           "<b>u 和 v 搞反</b>：u 是初速度（开始时），v 是末速度（结束时）。考试发的公式表用 u、v，旧教材的 v<sub>i</sub>、v<sub>f</sub> 是同一个意思。",
            "<b>追及题忘了时间差</b>：晚出发的物体用时更短。"],
  defs=[("Uniform acceleration", "匀加速", "Acceleration that remains constant in magnitude and direction.")],
  ex=[dict(n="5.1", lv=1, q="A car starts from rest and accelerates uniformly at 3 m·s⁻² for 6 s. Calculate its final velocity and its displacement.", mk=4, ln=3),
